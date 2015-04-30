@@ -16,29 +16,36 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
  
-## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
-
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+# Thumbs Check #
+### Enhanced real-time interaction with analytics ###
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  A smartphone based "thumbs-check" system for a lecturer to gauge how well the class understood newly introduced material, and a random student selector for the user to pick a student to interact with. Includes time-stamp analytics for the lecturer to trouble-shoot the lecture according to what was most confusing, and the ability to issue instant micro-quizzes, equivalent to "arms this way" polling.  
 
 ## Problem ##
-  > Describe the problem your product solves.
+  * The visual thumbs-check system is very informal, and is not set up for post-lecture analytics.
+  * Certain students are very vocal during lecture, and attempts to pick random students to speak are not very random, and often settle on the same students.
+  * Polling the class on how well they think they understand something is subject to inaccurate self-reporting.
+  * Question queue management is yet another burden on the lecturer
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  * Each thumbs-check is time-stamped; this can be used to revise the portion of the lectures that are unclear.
+  * Random student selection precludes selection biases so that more students will interact during lecture.
+  * Micro-quizzes are more accurate than self-reporting; students can mistakenly think they understand something, but not with quizzes.
+  * The question queue takes this burden off the lecturer
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > We took the pain-points of our lectures and turned it into an opportunity.
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  1) Students and Lecturers both log in with Github
+  2) Prepare and store sets of instant quizes.
+  3) Start a lecture from the lecturer's interface.
+  4) Issue a thumbs check at will. The dashboard shows live data updates as data comes in.
+  5) Issue pre-written instant quizzes at will.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > Instant quizzes and thumbs-check analytics let us do test-driven-development of our lectures. Rapid iteration of our teaching has never been easier.
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  Sign up for Thumbs Check and prepare a lecture today!
