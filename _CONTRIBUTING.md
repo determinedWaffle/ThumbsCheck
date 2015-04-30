@@ -1,50 +1,34 @@
 # Contributing
 
-## General Workflow
+## High Level Workflow
 
-1. Fork the repo
-1. Cut a namespaced feature branch from master
-  - bug/...
-  - feat/...
-  - test/...
-  - doc/...
-  - refactor/...
-1. Make commits to your feature branch. Prefix each commit like so:
-  - (feat) Added a new feature
-  - (fix) Fixed inconsistent tests [Fixes #0]
-  - (refactor) ...
-  - (cleanup) ...
-  - (test) ...
-  - (doc) ...
-1. When you've finished with your fix or feature, Rebase upstream changes into your branch. submit a [pull request][]
-   directly to master. Include a description of your changes.
-1. Your pull request will be reviewed by another maintainer. The point of code
-   reviews is to help keep the codebase clean and of high quality and, equally
-   as important, to help you grow as a programmer. If your code reviewer
-   requests you make a change you don't understand, ask them why.
-1. Fix any issues raised by your code reviwer, and push your fixes as a single
-   new commit.
-1. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
+1. Fork the repo & clone to your local
+1. Cut a feature branch from master
+1. Make commits to your feature branch.
+1. When you've finished with your fix or feature, Rebase upstream changes into your branch. 
+1. Submit a [pull request][] to the master repo
+1. Your pull request will be reviewed by another maintainer and merged in if approved
+1. (Fix any issues raised by your code reviwer, and push your fixes as a single
+   new commit.)
 
 ## Detailed Workflow
 
-### Fork the repo
+### Step 1: Fork the repo
+ 
+Use github’s interface to make a fork of the master repo (github.com/<org_name>/<repo_name>.git). 
 
-Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
+### Step 2: Clone and branch
+
+Navigate to your forked repo (github.com/<your_name>/<repo_name>.git). Clone this repo locally using `git clone`. Then add the MASTER REPO (which belongs to the org, not you) as an upstream remote:
 
 ```
-git remote add upstream https://github.com/hackreactor-labs/<NAME_OF_REPO>.git
+git remote add upstream https://github.com/<org_name>/<NAME_OF_REPO>.git
 ```
 
-### Cut a namespaced feature branch from master
+### Step 3: Cut a feature branch
 
-Your branch should follow this naming convention:
-  - bug/...
-  - feat/...
-  - test/...
-  - doc/...
-  - refactor/...
-
+On your local machine, create a branch and give it a name indicating what your feature is.
+  
 These commands will help you do this:
 
 ``` bash
@@ -53,25 +37,14 @@ These commands will help you do this:
 git checkout -b `your-branch-name`
 ```
 
-### Make commits to your feature branch. 
+### Step 4: Make commits to your feature branch
 
-Prefix each commit like so
-  - (feat) Added a new feature
-  - (fix) Fixed inconsistent tests [Fixes #0]
-  - (refactor) ...
-  - (cleanup) ...
-  - (test) ...
-  - (doc) ...
+As you write code for your feature, commit often. Make sure you are committing to your FEATURE BRANCH not master!
 
-Make changes and commits on your branch, and make sure that you
-only make changes that are relevant to this branch. If you find
-yourself making unrelated changes, make a new branch for those
-changes.
+If you find yourself making changes unrelated to the current feature, make a new branch for those changes.
 
 #### Commit Message Guidelines
 
-- Commit messages should be written in the present tense; e.g. "Fix continuous
-  integration script".
 - The first line of your commit message should be a brief summary of what the
   commit changes. Aim for about 70 characters max. Remember: This is a summary,
   not a detailed description of everything that changed.
