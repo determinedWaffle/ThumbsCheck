@@ -104,7 +104,7 @@ This ensures that your fork of the repo on GitHub gets the feature branch with a
 
 Go to GitHub and find YOUR FORK of the master repo. Initiate a pull request from your fork to the MASTER REPO.
 
-In the title of your pull request, include one of these keywords: CLOSES, FIXES or RESOLVES, followed by the issue # that you are resolving with this pull request. Please always include CLOSES, FIXES or RESOLVES plus the issue number with your pull request, that way the issue is closed automatically for us.
+In the title of your pull request, include one of these keywords: CLOSES, FIXES or RESOLVES, followed by "#", followed by the issue number you are resolving with this pull request. For ex. "Fixes #19". Please always include one of these keywords plus the issue number, so that the issue is closed automatically for us.
 
 At least one other person MUST give your changes a code review, and once
 they are satisfied they will merge your changes into upstream. Alternatively,
