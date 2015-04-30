@@ -1,12 +1,12 @@
-# Project Name
+# Thumbs Check
 
-> Pithy project description
+> Enhanced real-time interaction with analytics
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Mike Yao
+  - __Scrum Master__: Andy Sponring
+  - __Development Team Members__: Austin Liu, David Trinh, Mike Yao, Andy Sponring
 
 ## Table of Contents
 
@@ -44,9 +44,9 @@ bower install
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://github.com/determinedWaffle/determinedWaffle/issues)
 
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](https://github.com/determinedWaffle/determinedWaffle/blob/master/_CONTRIBUTING.md) for contribution guidelines.
