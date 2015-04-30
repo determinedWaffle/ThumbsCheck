@@ -17,7 +17,7 @@
  
 Use github’s interface to make a fork of the master repo (github.com/<org_name>/<repo_name>.git). 
 
-### Step 2: Clone and branch
+### Step 2: Clone the repo
 
 Navigate to your forked repo (github.com/<your_name>/<repo_name>.git). Clone this repo locally using `git clone`. Then add the MASTER REPO (which belongs to the org, not you) as an upstream remote:
 
@@ -52,12 +52,9 @@ If you find yourself making changes unrelated to the current feature, make a new
   be a blank line and then a more detailed description of the commit. This can be
   as detailed as you want, so dig into details here and keep the first line short.
 
-### Rebase upstream changes into your branch
+### Step 5: Rebase upstream changes into your branch
 
-Once you are done making changes, you can begin the process of getting
-your code merged into the main repo. Step 1 is to rebase upstream
-changes to the master branch into yours by running this command
-from your branch:
+Once you are done making changes, run this command:
 
 ```bash
 git pull --rebase upstream master
@@ -93,12 +90,21 @@ make sure they work also.
 If rebasing broke anything, fix it, then repeat the above process until
 you get here again and nothing is broken and all the tests pass.
 
-### Make a pull request
+### Step 6: 
 
-Make a clear pull request from your fork and branch to the upstream master
-branch, detailing exactly what changes you made and what feature this
-should add. The clearer your pull request is the faster you can get
-your changes incorporated into this repo.
+Push your local changes to your fork on GitHub:
+
+```bash
+git push origin BRANCH_NAME
+```
+
+This ensures that your fork of the repo on GitHub gets the feature branch with all your changes.
+
+### Step 7: Make a pull request
+
+Go to GitHub and find YOUR FORK of the master repo. Initiate a pull request from your fork to the MASTER REPO.
+
+In the title of your pull request, include one of these keywords: CLOSES, FIXES or RESOLVES, followed by the issue # that you are resolving with this pull request. Please always include CLOSES, FIXES or RESOLVES plus the issue number with your pull request, that way the issue is closed automatically for us.
 
 At least one other person MUST give your changes a code review, and once
 they are satisfied they will merge your changes into upstream. Alternatively,
@@ -109,7 +115,20 @@ Once you get back here, make a comment requesting further review and
 someone will look at your code again. If they like it, it will get merged,
 else, just repeat again.
 
-Thanks for contributing!
+### Step 8: Get everything in sync
+
+After your pull request has been accepted, the master branches on your GitHub fork and your local machine will be out of sync with the master repo (upstream).
+
+Run the following commands on your computer:
+
+```bash
+git checkout master
+git pull --rebase upstream master
+git push origin master
+```
+
+You're now ready to start a new feature! Go back to Step 3 and follow the workflow again!
+
 
 ### Guidelines
 
@@ -127,12 +146,12 @@ Thanks for contributing!
 This is just to help you organize your process
 
 - [ ] Did I cut my work branch off of master (don't cut new branches from existing feature brances)?
-- [ ] Did I follow the correct naming convention for my branch?
 - [ ] Is my branch focused on a single main change?
  - [ ] Do all of my changes directly relate to this change?
 - [ ] Did I rebase the upstream master branch after I finished all my
   work?
 - [ ] Did I write a clear pull request message detailing what changes I made?
+- [ ] Did I include the keywords FIXES, RESOLVES or CLOSES plus the issue number in my pull request?
 - [ ] Did I get a code review?
  - [ ] Did I make any requested changes from that code review?
 
