@@ -1,4 +1,6 @@
 angular.module('thumbsCheckApp', [
-  'ngRoute'
-  'firebase'
+  'ngRoute',
+  'firebase',
+  'firebase.ref',
+  'firebase.auth'
 ]);
