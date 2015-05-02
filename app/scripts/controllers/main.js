@@ -5,5 +5,6 @@ angular.module('thumbsCheckApp')
     // create a new firebase connection as below;
     var ref = new Firebase('https://waffleup.firebaseio.com');
     $scope.input = '';
+
     $scope.logout = function() { Auth.$unauth(); };
   });

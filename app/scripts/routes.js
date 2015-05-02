@@ -20,6 +20,17 @@ angular.module('thumbsCheckApp')
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
+      .when('/demo', {
+        templateUrl: 'views/demo.html',
+        controller: 'DemoCtrl'
+      })
+      .when('/student', {
+        templateUrl: 'views/student.html',
+        controller: 'StudentCtrl'
+      })
+      .when('/instructor', {
+        templateUrl: 'views/instructor.html',
+        controller: 'InstructorCtrl'
       })
       .otherwise({
         redirectTo: '/'
