@@ -6,9 +6,9 @@ angular.module('thumbsCheckApp')
     $scope.student1ID = '1';
     $scope.student2ID = '2';
 
-    $firebaseObject(responsesRef.child($scope.student1ID)).$bindTo($scope, 'student1');
+    $firebaseObject(responsesRef).$bindTo($scope, 'students');
 
-    $firebaseObject(responsesRef.child($scope.student2ID)).$bindTo($scope, 'student2');
+    // $firebaseObject(responsesRef).$bindTo($scope, 'student2');
 
 
     $scope.logout = function() {
