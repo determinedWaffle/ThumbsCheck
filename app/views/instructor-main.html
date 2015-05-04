@@ -1,0 +1,11 @@
+this is instructor view.
+
+<div>{{ radioModel }}</div>
+
+<div class="btn-group">
+  <a class="btn btn-primary" ng-model="radioModel" btn-radio="'thumbs'" href='#/instructor-thumbs'>Thumbs Check</a>
+  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'quiz'">Mini-quiz</label>
+  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'results'">Previous Results</label>
+</div>
+
+<button ng-click="reset()">Reset</button>
