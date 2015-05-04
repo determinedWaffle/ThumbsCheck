@@ -5,6 +5,10 @@ angular.module('thumbsCheckApp')
     var triggerRef = ref.child('trigger');
     $scope.trigger = $firebaseObject(triggerRef);
 
+    $scope.clicked = function(){
+      console.log('clicked:' , $scope.radioModel);
+      $scope.trigger.val = !$scope.trigger.val
+    };
 
     // $firebaseObject(responsesRef).$bindTo($scope, 'students');
     // $scope.students = {};

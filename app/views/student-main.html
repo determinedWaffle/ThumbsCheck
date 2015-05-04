@@ -6,10 +6,10 @@
 Thumbs Pick
 <div>{{ radioModel }}</div>
 
-<div class="btn-group">
-  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'up'" >Up</label>
-  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'middle'">Middle</label>
-  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'down'">Down</label>
+<div class="btn-group" ng-init="radioModel='middle'">
+  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'up'" ng-click="clicked()">Up</label>
+  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'middle'" ng-click="clicked()">Middle</label>
+  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'down'" ng-click="clicked()">Down</label>
 </div>
 
 </div>
