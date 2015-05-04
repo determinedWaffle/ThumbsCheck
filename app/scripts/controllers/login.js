@@ -4,25 +4,29 @@ angular.module('thumbsCheckApp')
       $scope.err = null;
       Auth.$authWithOAuthPopup(provider, {
         rememberMe: true
-      }).then(addUser).then(redirect, showError);
+      }).then(addUser, showError);
     };
 
     function addUser() {
       Ref.onAuth(function(user) {
-        var studentObj = $firebaseObject(Ref.child('users/'));
+        var instructorsObj = $firebaseObject(Ref.child('instructors'));
+        var studentObj = $firebaseObject(Ref.child('students/'));
         var userName;
         if (user) {
-          studentObj.$loaded().then(function(usersTable) {
-            userName = user.github.displayName || 'Please fill in your name, ' + user.github.username;
-            studentObj[user.uid] = userName;
-            studentObj.$save();
+          instructorsObj.$loaded().then(function(instructorsTable) {
+            if (instructorsTable[user.uid]) {
+              $location.path('/instructor');
+            } else {
+              studentObj.$loaded().then(function(usersTable) {
+                userName = user.github.displayName || 'Please fill in your name, ' + user.github.username;
+                studentObj[user.uid] = userName;
+                studentObj.$save();
+                $location.path('/student');
+              });
+            }
           });
         }
       });
-    }
-
-    function redirect() {
-      $location.path('/');
     }
 
     function showError(err) {
