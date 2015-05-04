@@ -6,5 +6,8 @@ angular.module('thumbsCheckApp')
     var ref = new Firebase('https://waffleup.firebaseio.com');
     $scope.input = '';
 
-    $scope.logout = function() { Auth.$unauth(); };
+    $scope.logout = function() {
+      Auth.$unauth();
+    };
+
   });
