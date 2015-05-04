@@ -1,0 +1,18 @@
+
+
+<div ng-show="trigger.val">Waiting...</div>
+
+<div ng-hide="trigger.val">
+Thumbs Pick
+<div>{{ radioModel }}</div>
+
+<div class="btn-group">
+  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'up'" >Up</label>
+  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'middle'">Middle</label>
+  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'down'">Down</label>
+</div>
+
+</div>
+
+<button ng-click="trigger.val = !trigger.val">Toggle</button>
+
