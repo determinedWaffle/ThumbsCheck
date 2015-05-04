@@ -1,5 +1,5 @@
 angular.module('thumbsCheckApp')
-  .controller('PickCtrl', function($scope, $firebaseObject, Ref){
+  .controller('PickCtrl', function($scope, $firebaseObject, $rootScope, Ref){
     var data = {
      up: ["github:8604205", "github:391394"],
      down: ["github:643322", "github:23454", "github:23423455", "github:101054"],
@@ -15,12 +15,14 @@ angular.module('thumbsCheckApp')
     $scope.pickRandom = function(array) {
       var path = "https://avatars0.githubusercontent.com/u/";
       var index = Math.floor(Math.random() * array.length);
-      console.log(array[index]);
       path += array[index].split(":")[1];
-      console.log("path is " + path);
-      path += "?size=150";
+      path += "?size=1028";
       $scope.path = path;
-      console.log($scope.path);
+      $rootScope.randomPick = {
+        uid: array[index],
+        image: $scope.path
+      };
+
     };
 
   });
