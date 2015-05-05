@@ -21,14 +21,60 @@ angular.module('thumbsCheckApp')
           result[2]+=1;
         } 
       }
-      console.log('inside total:',result);
+      // console.log('inside total:',result);
+      return result;
+    };
+
+    $scope.generateStudentList = function(responses){
+      var result = {up:[], down:[],middle:[]};
+      for (var key in responses){
+        var response = responses[key];
+        if (response === 'up'){
+          result.up.push(key);
+        } else if (response === 'middle'){
+          result.middle.push(key);
+        } else if (response === 'down'){
+          result.down.push(key);
+        } 
+      }
+      // console.log('studentList:',result);
       return result;
     };
 
     responesObj.$watch(function(){
-      console.log('watch');
+      // console.log('watch');
       $scope.result = $scope.total($scope.responses);
-      console.log($scope.result);
+      $scope.studentList = $scope.generateStudentList($scope.responses);
     });
+
+    // $scope.imageUrl = "https://avatars3.githubusercontent.com/u/7408826?v=3&s=140";
+
+    // var data = {
+    //  up: ["github:8604205", "github:391394"],
+    //  down: ["github:643322", "github:23454", "github:23423455", "github:101054"],
+    //  middle: ["github:098765"]
+    // };
+
+    // $scope.data = data;
+
+    $scope.pickRandom = function(array) {
+      // console.log('pickRandom', array);
+      var path = "https://avatars0.githubusercontent.com/u/";
+      var index = Math.floor(Math.random() * array.length);
+      path += array[index].split(":")[1];
+      path += "?size=1028";
+      var uid = array[index];
+      // console.log('uid',uid);
+      var studentRef = Ref.child('students');
+      $firebaseObject(studentRef).$loaded().then(function(students){
+        // console.log('studentsTable', students);
+        $scope.studentName = students[uid];
+        // console.log('studentName', $scope.studentName);
+        $scope.pickedStudent = {
+          name: students[uid],
+          imageUrl: path
+        };
+      });
+    };
 
   });

@@ -1,15 +1,22 @@
 <!-- Instructor Thumbs View -->
 <!-- <pre>{{trigger.val}}</pre> -->
 
+<!-- <div class="imageFrame" ng-model="imageFrame">
+
+</div> -->
+<div class="imageFrame" ng-init="pickedStudent.imageUrl='https://avatars3.githubusercontent.com/u/7408826?v=3&s=140'">
+  <img ng-src={{pickedStudent.imageUrl}} alt="Github avatar">
+  <p>{{pickedStudent.name}}</p>
+</div>
 
 <div class="btn-group">
-  <button type="button" class="btn btn-default btn-lg">
+  <button ng-click="pickRandom(studentList.up)" type="button" class="btn btn-default btn-lg">
     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> {{result[0]}}
   </button>
-  <button type="button" class="btn btn-default btn-lg">
+  <button ng-click="pickRandom(studentList.middle)" type="button" class="btn btn-default btn-lg">
     <span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span> {{result[1]}}
   </button>
-  <button type="button" class="btn btn-default btn-lg">
+  <button ng-click="pickRandom(studentList.down)" type="button" class="btn btn-default btn-lg">
     <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> {{result[2]}}
   </button>
 </div>
@@ -19,3 +26,4 @@
       Start New
   </button>
 </div>
+

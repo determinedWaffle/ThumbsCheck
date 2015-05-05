@@ -1,0 +1,11 @@
+div.imageFrame {
+  min-height: 200px;
+  width: 200px;
+  background-color: grey;
+}
+
+div.imageFrame img {
+  height: auto;
+  width: 200px;
+
+}

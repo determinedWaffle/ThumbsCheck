@@ -2,8 +2,8 @@ angular.module('thumbsCheckApp')
   .controller('StudentCtrl', function($scope, $firebaseObject, Ref, user) {
     // Refactor this firebase url to using Ref
     var triggerRef = Ref.child('trigger');
-    // $scope.uid = user.uid;
-    $scope.uid = ~~(Math.random()*100).toString();
+    $scope.uid = user.uid;
+    // $scope.uid = ~~(Math.random()*100).toString();
 
     var responsesRef = Ref.child('responses'); // collection within the database.
     var trigObj = $firebaseObject(triggerRef);
