@@ -21,10 +21,6 @@ angular.module('thumbsCheckApp')
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
-      .when('/demo', {
-        templateUrl: 'views/demo.html',
-        controller: 'DemoCtrl'
-      })
       .whenAuthenticated('/student-main', {
         templateUrl: 'views/student-main.html',
         controller: 'StudentCtrl'
