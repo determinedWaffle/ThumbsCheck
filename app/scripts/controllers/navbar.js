@@ -3,6 +3,7 @@
     $scope.logout = function() {
       Auth.$unauth();
     };
+
     $scope.role = 'student';
     $rootScope.role = 'student';
     broadcastInstructorRole.listen(function(val) {

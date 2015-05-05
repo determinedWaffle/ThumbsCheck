@@ -25,6 +25,4 @@ angular.module('thumbsCheckApp')
           });
       });
     };
-
-
   });

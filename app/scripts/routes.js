@@ -14,8 +14,7 @@ angular.module('thumbsCheckApp')
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .whenAuthenticated('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        redirectTo: '/instructor-main'
       })
       .when('/login', {
         templateUrl: 'views/login.html',

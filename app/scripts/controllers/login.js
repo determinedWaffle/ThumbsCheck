@@ -1,5 +1,8 @@
 angular.module('thumbsCheckApp')
-  .controller('LoginCtrl', function($scope, $location, $firebaseObject, $rootScope, Auth, Ref, broadcastInstructorRole) {
+  .controller('LoginCtrl', function($scope, $location, $firebaseObject, $rootScope, Auth, Ref) {
+    if (Auth.$getAuth()) {
+      $location.path('/');
+    }
     $scope.oauthLogin = function(provider) {
       $scope.err = null;
       Auth.$authWithOAuthPopup(provider, {
@@ -15,7 +18,8 @@ angular.module('thumbsCheckApp')
         if (user) {
           instructorsObj.$loaded().then(function(instructorsTable) {
             if (instructorsTable[user.uid]) {
-              broadcastInstructorRole.broadcast("instructor");
+              user.role = 'instructor';
+              localStorage.setItem(user.uid, 'instructor');
               $location.path('/instructor-main');
             } else {
               studentObj.$loaded().then(function(usersTable) {
