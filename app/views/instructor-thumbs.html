@@ -1,7 +1,21 @@
-Instructor Thumbs View
-<pre>{{trigger.val}}</pre>
-<button type="button" class="btn btn-primary" ng-model="trigger.val" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-change="trigger.$save()">
-    Start New
-</button>
+<!-- Instructor Thumbs View -->
+<!-- <pre>{{trigger.val}}</pre> -->
 
-{{result}}
+
+<div class="btn-group">
+  <button type="button" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> {{result[0]}}
+  </button>
+  <button type="button" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span> {{result[1]}}
+  </button>
+  <button type="button" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> {{result[2]}}
+  </button>
+</div>
+
+<div>
+  <button type="button" class="btn btn-primary" ng-model="trigger.val" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-change="trigger.$save()">
+      Start New
+  </button>
+</div>
