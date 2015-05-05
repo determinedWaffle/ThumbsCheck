@@ -15,6 +15,8 @@ angular.module('thumbsCheckApp')
         if (user) {
           instructorsObj.$loaded().then(function(instructorsTable) {
             if (instructorsTable[user.uid]) {
+              user.role = "instructor";
+              console.log(user);
               $location.path('/instructor-main');
             } else {
               studentObj.$loaded().then(function(usersTable) {
