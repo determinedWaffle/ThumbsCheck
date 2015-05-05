@@ -15,13 +15,13 @@ angular.module('thumbsCheckApp')
         if (user) {
           instructorsObj.$loaded().then(function(instructorsTable) {
             if (instructorsTable[user.uid]) {
-              $location.path('/instructor');
+              $location.path('/instructor-main');
             } else {
               studentObj.$loaded().then(function(usersTable) {
                 userName = user.github.displayName || 'Please fill in your name, ' + user.github.username;
                 studentObj[user.uid] = userName;
                 studentObj.$save();
-                $location.path('/student');
+                $location.path('/student-main');
               });
             }
           });
