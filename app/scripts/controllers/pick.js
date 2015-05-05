@@ -6,8 +6,8 @@ angular.module('thumbsCheckApp')
      middle: ["github:098765"]
     };
 
-    var responsesObj = $firebaseObject(Ref.child('responses/'));
-    var studentObj = $firebaseObject(Ref.child('students/'));
+    var responsesObj = $firebaseObject(Ref.child('responses'));
+    var studentObj = $firebaseObject(Ref.child('students'));
 
     $scope.data = data;
     $scope.picked = null;
