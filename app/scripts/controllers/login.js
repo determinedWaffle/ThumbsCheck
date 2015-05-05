@@ -10,7 +10,7 @@ angular.module('thumbsCheckApp')
     function addUser() {
       Ref.onAuth(function(user) {
         var instructorsObj = $firebaseObject(Ref.child('instructors'));
-        var studentObj = $firebaseObject(Ref.child('students/'));
+        var studentObj = $firebaseObject(Ref.child('students'));
         var userName;
         if (user) {
           instructorsObj.$loaded().then(function(instructorsTable) {
