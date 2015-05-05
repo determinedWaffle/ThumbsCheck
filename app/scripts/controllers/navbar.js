@@ -4,5 +4,9 @@
       Auth.$unauth();
     };
     $scope.role = 'student';
-    broadcastInstructorRole.listen(function(val) {$scope.role = 'instructor'; })
+    $rootScope.role = 'student';
+    broadcastInstructorRole.listen(function(val) {
+      $scope.role = 'instructor'; 
+      $rootScope.role = 'instructor';
+    });
   })

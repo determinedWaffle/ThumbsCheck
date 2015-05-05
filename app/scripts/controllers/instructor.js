@@ -1,5 +1,8 @@
 angular.module('thumbsCheckApp')
-  .controller('InstructorCtrl', function($scope, $firebaseObject, $firebase){
+  .controller('InstructorCtrl', function($scope, $firebaseObject, $firebase, $rootScope, $location){
+    if ($rootScope.role !== 'instructor') {
+        $location.path('/student-main');
+    }
     var ref = new Firebase('https://waffleup.firebaseio.com/');    
     var responsesRef = ref.child('responses'); // collection within the database.
     var triggerRef = ref.child('trigger');
