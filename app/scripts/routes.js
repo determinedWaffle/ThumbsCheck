@@ -1,7 +1,7 @@
 angular.module('thumbsCheckApp')
   .config(['$routeProvider', 'SECURED_ROUTES', function($routeProvider, SECURED_ROUTES) {
     $routeProvider.whenAuthenticated = function(path, route) {
-      route.resolve = route.reslove || {};
+      route.resolve = route.resolve || {};
       route.resolve.user = ['Auth', function(Auth) {
         return Auth.$requireAuth();
       }];
