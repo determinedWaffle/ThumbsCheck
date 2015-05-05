@@ -37,6 +37,10 @@ angular.module('thumbsCheckApp')
         templateUrl: 'views/instructor-thumbs.html',
         controller: 'InstructorCtrl'
       })
+      .whenAuthenticated('/pick', {
+        templateUrl: 'views/pick.html',
+        controller: 'PickCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

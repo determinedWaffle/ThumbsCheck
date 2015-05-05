@@ -1,0 +1,15 @@
+this is instructor view.
+
+<div ng-click="pickRandom(data.up); picked = 'up'">
+  Up: {{ data.up.length }}
+  <img ng-src="{{ path }}" ng-show="picked === 'up'" />
+</div>
+<div ng-click="pickRandom(data.middle); picked = 'middle'">
+  Middle: {{ data.middle.length }}
+  <img ng-src="{{ path }}" ng-show="picked === 'middle'"/>
+</div>
+<div ng-click="pickRandom(data.down); picked = 'down'">
+  Down: {{ data.down.length }}
+  <img ng-src="{{ path }}" ng-show="picked === 'down'"/>
+</div>
+<button ng-click="reset()">Reset</button>
