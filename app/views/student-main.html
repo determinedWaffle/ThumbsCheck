@@ -1,18 +1,18 @@
 
 
-<div ng-show="trigger.val">Waiting...</div>
+<button ng-click="studentTrigger = !studentTrigger">Toggle</button>
+<div ng-show="studentTrigger">Waiting...</div>
 
-<div ng-hide="trigger.val">
+<div ng-hide="studentTrigger">
 Thumbs Pick
-<div>{{ radioModel }}</div>
+<div>{{ thumbsChoice }}</div>
 
-<div class="btn-group" ng-init="radioModel='middle'">
-  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'up'" ng-click="clicked()">Up</label>
-  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'middle'" ng-click="clicked()">Middle</label>
-  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'down'" ng-click="clicked()">Down</label>
+<div class="btn-group" ng-init="thumbsChoice='middle'">
+  <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'up'" ng-click="clicked()">Up</label>
+  <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'middle'" ng-click="clicked()">Middle</label>
+  <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'down'" ng-click="clicked()">Down</label>
 </div>
 
 </div>
 
-<button ng-click="trigger.val = !trigger.val">Toggle</button>
 
