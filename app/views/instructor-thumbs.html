@@ -1,0 +1,12 @@
+Instructor Thumbs View
+<pre>{{trigger.val}}</pre>
+<button type="button" class="btn btn-primary" ng-model="trigger.val" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-change="trigger.$save()">
+    Start New
+</button>
+
+{{responses}}
+<ul>
+  <li ng-repeat="(key, value) in responses">
+    {{key}}:{{value}}
+  </li>
+</ul>

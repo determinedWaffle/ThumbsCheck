@@ -1,0 +1,20 @@
+
+
+<button ng-click="studentTrigger = !studentTrigger">Toggle</button>
+<div ng-show="studentTrigger">Waiting...</div>
+
+<div ng-hide="studentTrigger">
+Thumbs Pick
+<div>{{ thumbsChoice }}</div>
+
+<div class="btn-group" ng-init="thumbsChoice='middle'">
+  <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'up'" ng-click="clicked()">Up</label>
+  <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'middle'" ng-click="clicked()">Middle</label>
+  <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'down'" ng-click="clicked()">Down</label>
+</div>
+
+</div>
+
+{{uid}}
+
+

@@ -1,26 +1,30 @@
 angular.module('thumbsCheckApp')
-  .controller('StudentCtrl', function($scope, $firebaseObject, $firebase, Auth) {
+  .controller('StudentCtrl', function($scope, $firebaseObject, $firebase, Auth, user) {
     var ref = new Firebase('https://waffleup.firebaseio.com/');
+    var triggerRef = ref.child('trigger');
+    // $scope.uid = user.uid;
+    $scope.uid = ~~(Math.random()*100).toString();
     var responsesRef = ref.child('responses'); // collection within the database.
 
-    $scope.student1ID = '1';
-    $scope.student2ID = '2';
+    var unwatch = $firebaseObject(triggerRef).$watch(function() {
+      $scope.studentTrigger = false;
+      $scope.thumbsChoice = 'middle';
+    });
 
-    $firebaseObject(responsesRef.child($scope.student1ID)).$bindTo($scope, 'student1');
-
-    $firebaseObject(responsesRef.child($scope.student2ID)).$bindTo($scope, 'student2');
-
-
-    $scope.logout = function() {
-      Auth.$unauth();
+    $scope.clicked = function(){
+      console.log('clicked');
+      // $scope.studentTrigger = !$scope.studentTrigger;
+      var obj = $firebaseObject(responsesRef);
+      obj.$loaded().then(function(data){
+        obj[$scope.uid] = $scope.thumbsChoice;
+        obj.$save().then(function(ref) {
+            console.log("Success");
+            // ref.key() === obj.$id; // true
+          }, function(error) {
+            console.log("Error:", error);
+          });
+      });
     };
-    // $scope.students = $firebaseObject(responsesRef);
 
-    // var count = 100;
-    // while(count--){
-    //   // var sid = 'student'+ count + 'ID';
-    //   // $scope[sid] = count.toString();
-    //   $firebaseObject(responsesRef.child(count.toString())).$bindTo($scope, 'student'+ count.toString());
-    // }
 
   });

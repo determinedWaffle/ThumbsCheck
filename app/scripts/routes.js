@@ -25,12 +25,16 @@ angular.module('thumbsCheckApp')
         templateUrl: 'views/demo.html',
         controller: 'DemoCtrl'
       })
-      .whenAuthenticated('/student', {
-        templateUrl: 'views/student.html',
+      .whenAuthenticated('/student-main', {
+        templateUrl: 'views/student-main.html',
         controller: 'StudentCtrl'
       })
-      .whenAuthenticated('/instructor', {
-        templateUrl: 'views/instructor.html',
+      .whenAuthenticated('/instructor-main', {
+        templateUrl: 'views/instructor-main.html',
+        controller: 'InstructorCtrl'
+      })
+      .whenAuthenticated('/instructor-thumbs', {
+        templateUrl: 'views/instructor-thumbs.html',
         controller: 'InstructorCtrl'
       })
       .otherwise({
