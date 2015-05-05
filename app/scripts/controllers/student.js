@@ -1,10 +1,10 @@
 angular.module('thumbsCheckApp')
-  .controller('StudentCtrl', function($scope, $firebaseObject, $firebase, Auth, user) {
-    var ref = new Firebase('https://waffleup.firebaseio.com/');
-    var triggerRef = ref.child('trigger');
+  .controller('StudentCtrl', function($scope, $firebaseObject, Ref, user) {
+    // Refactor this firebase url to using Ref
+    var triggerRef = Ref.child('trigger');
     // $scope.uid = user.uid;
     $scope.uid = ~~(Math.random()*100).toString();
-    var responsesRef = ref.child('responses'); // collection within the database.
+    var responsesRef = Ref.child('responses'); // collection within the database.
 
     var unwatch = $firebaseObject(triggerRef).$watch(function() {
       $scope.studentTrigger = false;
