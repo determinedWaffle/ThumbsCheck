@@ -4,11 +4,16 @@ angular.module('thumbsCheckApp')
     var triggerRef = Ref.child('trigger');
     // $scope.uid = user.uid;
     $scope.uid = ~~(Math.random()*100).toString();
-    var responsesRef = Ref.child('responses'); // collection within the database.
 
-    var unwatch = $firebaseObject(triggerRef).$watch(function() {
-      $scope.studentTrigger = false;
-      $scope.thumbsChoice = 'middle';
+    var responsesRef = Ref.child('responses'); // collection within the database.
+    var trigObj = $firebaseObject(triggerRef);
+    trigObj.$loaded().then(function(data){
+      console.log('data loaded');
+      trigObj.$watch(function() {
+        console.log('watch', $scope.thumbsTrigger);
+        $scope.thumbsTrigger = true;
+        $scope.thumbsChoice = 'middle';
+      });
     });
 
     $scope.clicked = function(){
