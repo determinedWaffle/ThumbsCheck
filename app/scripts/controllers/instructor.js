@@ -1,5 +1,5 @@
 angular.module('thumbsCheckApp')
-  .controller('InstructorCtrl', function($scope, $firebaseObject, $firebase, $rootScope, $location, user, broadcastInstructorRole){
+  .controller('InstructorCtrl', function($scope, $firebaseObject, Ref, $rootScope, $location, user, broadcastInstructorRole){
     if (localStorage.getItem(user.uid) !== 'instructor') {
         $location.path('/student-main');
     }
@@ -8,8 +8,8 @@ angular.module('thumbsCheckApp')
     var triggerRef = Ref.child('trigger');
 
     $scope.trigger = $firebaseObject(triggerRef);
-    var responesObj = $firebaseObject(responsesRef);
-    $scope.responses = responesObj;
+    var responsesObj = $firebaseObject(responsesRef);
+    $scope.responses = responsesObj;
     $scope.result = [];
     
     // calculate total votes for each category
@@ -46,14 +46,17 @@ angular.module('thumbsCheckApp')
       return result;
     };
 
-    responseObj.$watch(function(){
+
+    responsesObj.$watch(function(){
       // console.log('watch');
       $scope.result = $scope.total($scope.responses);
       $scope.studentList = $scope.generateStudentList($scope.responses);
     });
 
     $scope.pickRandom = function(array) {
+      // If this category empty, don't proceed pick a student
       // console.log('pickRandom', array);
+      if (array.length === 0){return;}
       // Generate a url path to github avatar 
       var path = "https://avatars0.githubusercontent.com/u/";
       var index = Math.floor(Math.random() * array.length);
