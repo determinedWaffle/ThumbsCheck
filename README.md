@@ -62,7 +62,7 @@ In your browser open 'http://localhost:3000'.
 
 ## Roadmap
 
-View the project roadmap [here](https://github.com/determinedWaffle/determinedWaffle/issues)
+View the project roadmap [here](https://github.com/determinedWaffle/determinedWaffle/issues).
 
 
 ## Contributing
