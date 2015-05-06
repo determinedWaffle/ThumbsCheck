@@ -11,5 +11,13 @@ div.imageFrame img {
 }
 
 body{
-  background: url("assets/concrete_seamless.png") repeat;
+  /*background: url("../assets/concrete_seamless.png") repeat;*/
+  /*background: url("../assets/subtle_white_mini_waves.png") repeat;*/
+  /*background: url("../assets/school.png") repeat;*/
+  background: url("../assets/halftone.png") repeat;
+  /*background: url("../assets/seamless_paper_texture.png") repeat;*/
+}
+
+a.navbar-brand{
+  font-weight: bolder;
 }

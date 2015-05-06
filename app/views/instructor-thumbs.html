@@ -1,10 +1,11 @@
+<div class='col-lg-6 col-lg-offset-3'>
 <!-- Instructor Thumbs View -->
 <div class="imageFrame" ng-init="pickedStudent.imageUrl='https://avatars3.githubusercontent.com/u/7408826?v=3&s=140'">
   <img ng-src={{pickedStudent.imageUrl}} alt="Github avatar">
   <p>{{pickedStudent.name}}</p>
 </div>
 
-<div class="btn-group">
+<div class="btn-group btn-group-justified btn-group-lg">
   <button ng-click="pickRandom(studentList.up)" type="button" class="btn btn-default btn-lg">
     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> {{result[0]}}
   </button>
@@ -22,4 +23,5 @@
   </button>
 </div>
 
-<!-- {{responses}} -->
+{{responses}}
+</div>
