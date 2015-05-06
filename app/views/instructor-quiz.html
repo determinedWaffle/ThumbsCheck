@@ -15,3 +15,19 @@ this is instructor quiz view.
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
 
+<accordion close-others="oneAtATime">
+
+  <div ng-repeat="quiz in quizes">
+    
+    <accordion-group>
+    <accordion-heading>
+    <button ng-click="pushQuiz(quiz)">Push Quiz</button>
+    {{quiz.question}}
+    </accordion-heading>
+    <ul ng-repeat="choice in quiz.choices track by $index">
+      {{$index+1}} : {{choice}}
+    </ul>
+    </accordion-group>
+  </div>
+
+</accordion>

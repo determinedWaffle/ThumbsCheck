@@ -91,7 +91,12 @@ angular.module('thumbsCheckApp')
       });
     };
 
+
+/*Quiz*/
     $scope.choices = [];
+    var quizesRef = Ref.child('quizes');
+    var quizes = $firebaseArray(quizesRef);
+    $scope.quizes = quizes;
 
     $scope.add = function(){
       $scope.choices.push("");
@@ -108,9 +113,6 @@ angular.module('thumbsCheckApp')
       quiz.question = question;
       quiz.choices = choices;
       console.log(quiz);
-
-      var quizesRef = Ref.child('quizes');
-      var quizes = $firebaseArray(quizesRef);
       quizes.$add(quiz);
 
       //clear form
@@ -122,4 +124,15 @@ angular.module('thumbsCheckApp')
       // saves user input into $scope.choices based on ng-Change
       $scope.choices[$index] = choice;
     };
+
+
+    /*Accordion*/
+    $scope.pushQuiz = function(quiz){
+      console.log('clicked', quiz);
+      var newQuizRef = Ref.child('newQuiz');
+      var newQuizObj = $firebaseObject(newQuizRef);
+      newQuizObj.quiz = quiz;
+      newQuizObj.$save();
+    };
+
 });
