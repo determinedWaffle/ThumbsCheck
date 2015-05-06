@@ -9,6 +9,8 @@ angular.module('thumbsCheckApp')
     var responesObj = $firebaseObject(responsesRef);
     $scope.responses = responesObj;
     $scope.result = [];
+    
+    // calculate total votes for each category
     $scope.total = function(responses){
       var result = [0,0,0];
       for (var key in responses){
@@ -25,6 +27,7 @@ angular.module('thumbsCheckApp')
       return result;
     };
 
+    // Populate list of students githubID for each catergory
     $scope.generateStudentList = function(responses){
       var result = {up:[], down:[],middle:[]};
       for (var key in responses){
@@ -47,24 +50,16 @@ angular.module('thumbsCheckApp')
       $scope.studentList = $scope.generateStudentList($scope.responses);
     });
 
-    // $scope.imageUrl = "https://avatars3.githubusercontent.com/u/7408826?v=3&s=140";
-
-    // var data = {
-    //  up: ["github:8604205", "github:391394"],
-    //  down: ["github:643322", "github:23454", "github:23423455", "github:101054"],
-    //  middle: ["github:098765"]
-    // };
-
-    // $scope.data = data;
-
     $scope.pickRandom = function(array) {
       // console.log('pickRandom', array);
+      // Generate a url path to github avatar 
       var path = "https://avatars0.githubusercontent.com/u/";
       var index = Math.floor(Math.random() * array.length);
       path += array[index].split(":")[1];
       path += "?size=1028";
       var uid = array[index];
       // console.log('uid',uid);
+      // Retrieve studentName from firebase "students", then generate the pickedStudent object
       var studentRef = Ref.child('students');
       $firebaseObject(studentRef).$loaded().then(function(students){
         // console.log('studentsTable', students);
