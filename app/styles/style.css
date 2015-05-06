@@ -9,3 +9,7 @@ div.imageFrame img {
   width: 200px;
 
 }
+
+body{
+  background: url("assets/concrete_seamless.png") repeat;
+}
