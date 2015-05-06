@@ -13,44 +13,52 @@ angular.module('thumbsCheckApp')
     $scope.result = [];
     
     // calculate total votes for each category
-    $scope.total = function(responses){
-      var result = [0,0,0];
-      for (var key in responses){
-        var response = responses[key];
-        if (response === 'up'){
-          result[0]+=1;
-        } else if (response === 'middle'){
-          result[1]+=1;
-        } else if (response === 'down'){
-          result[2]+=1;
-        } 
-      }
-      // console.log('inside total:',result);
-      return result;
-    };
-
     // Populate list of students githubID for each catergory
-    $scope.generateStudentList = function(responses){
-      var result = {up:[], down:[],middle:[]};
-      for (var key in responses){
-        var response = responses[key];
-        if (response === 'up'){
-          result.up.push(key);
-        } else if (response === 'middle'){
-          result.middle.push(key);
-        } else if (response === 'down'){
-          result.down.push(key);
-        } 
-      }
-      // console.log('studentList:',result);
-      return result;
-    };
+    $scope.total = function(){
+      var result = [0,0,0];
+      var studentList = {up:[], down:[],middle:[]};
+      responsesObj.$loaded().then(function(responses){
+        // Make key: $id and $priority non-enumerable
+        Object.defineProperty(responses, '$id', {
+          enumerable: false
+        });
+        Object.defineProperty(responses, '$priority', {
+          enumerable: false
+        });
+        Object.defineProperty(responses, '$$conf', {
+          enumerable: false
+        });
 
+        // for (var i = 0; i < keys.length; i++){
+          for(var key in responses){
+            if (responses.hasOwnProperty(key)){
+              // console.log('key',key);
+              var response = responses[key][key];
+              if (response === 'up'){
+                result[0]+=1;
+                studentList.up.push(key);
+              } else if (response === 'middle'){
+                result[1]+=1;
+                studentList.middle.push(key);
+              } else if (response === 'down'){
+                result[2]+=1;
+                studentList.down.push(key);
+              } 
+            }
+
+        }
+      });
+
+
+      // console.log('inside total:',result);
+      return [result, studentList];
+    };
 
     responsesObj.$watch(function(){
       // console.log('watch');
-      $scope.result = $scope.total($scope.responses);
-      $scope.studentList = $scope.generateStudentList($scope.responses);
+      results = $scope.total();
+      $scope.result = results[0];
+      $scope.studentList = results[1];
     });
 
     $scope.pickRandom = function(array) {

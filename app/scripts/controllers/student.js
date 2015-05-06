@@ -3,9 +3,8 @@ angular.module('thumbsCheckApp')
     // Refactor this firebase url to using Ref
     var triggerRef = Ref.child('trigger');
     $scope.uid = user.uid;
-    // $scope.uid = ~~(Math.random()*100).toString();
-
-    var responsesRef = Ref.child('responses'); // collection within the database.
+    var studentResponseRef = Ref.child('responses').child($scope.uid); // collection within the database.
+    
     var trigObj = $firebaseObject(triggerRef);
     trigObj.$loaded().then(function(data){
       console.log('data loaded');
@@ -18,8 +17,8 @@ angular.module('thumbsCheckApp')
 
     $scope.clicked = function(){
       console.log('clicked');
-      // $scope.studentTrigger = !$scope.studentTrigger;
-      var obj = $firebaseObject(responsesRef);
+      $scope.studentTrigger = !$scope.studentTrigger;
+      var obj = $firebaseObject(studentResponseRef);
       obj.$loaded().then(function(data){
         obj[$scope.uid] = $scope.thumbsChoice;
         obj.$save().then(function(ref) {
@@ -28,6 +27,6 @@ angular.module('thumbsCheckApp')
           }, function(error) {
             console.log("Error:", error);
           });
-      });
-    };
+        });
+      };
   });
