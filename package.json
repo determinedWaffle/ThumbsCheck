@@ -18,6 +18,8 @@
   "homepage": "https://github.com/mikeyao/determinedWaffle#readme",
   "dependencies": {
     "express": "^4.12.3"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5"
   }
-
 }
