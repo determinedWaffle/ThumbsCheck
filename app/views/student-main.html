@@ -1,23 +1,23 @@
 
 <!-- For testing purpose, should be deleted on production -->
-<button ng-click="thumbsTrigger = !thumbsTrigger">Toggle</button>
+<div class='center-block' style='border: 1px solid red'>
+  <button ng-click="thumbsTrigger = !thumbsTrigger">Toggle</button>
+
+  <div ng-hide="thumbsTrigger" ng-init="thumbsTrigger=false">
+    Waiting...
+  </div>
 
 
+  <div  ng-show="thumbsTrigger">
+    Thumbs Picked: 
+    <div>{{ thumbsChoice }}</div>
 
-<div ng-hide="thumbsTrigger" ng-init="thumbsTrigger=false">Waiting...</div>
+    <div class="btn-group" ng-init="thumbsChoice='middle'">
+      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'up'" ng-click="clicked()">Up</label>
+      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'middle'" ng-click="clicked()">Middle</label>
+      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'down'" ng-click="clicked()">Down</label>
+    </div>
+  </div>
+  {{uid}}
 
-<div ng-show="thumbsTrigger">
-Thumbs Picked: 
-<div>{{ thumbsChoice }}</div>
-
-<div class="btn-group" ng-init="thumbsChoice='middle'">
-  <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'up'" ng-click="clicked()">Up</label>
-  <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'middle'" ng-click="clicked()">Middle</label>
-  <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'down'" ng-click="clicked()">Down</label>
 </div>
-
-</div>
-
-{{uid}}
-
-
