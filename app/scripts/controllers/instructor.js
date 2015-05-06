@@ -1,20 +1,38 @@
 angular.module('thumbsCheckApp')
   .controller('InstructorCtrl', function($scope, $firebaseObject, Ref, $rootScope, $location, user, broadcastInstructorRole){
+    // To get userID.role from web browser localStorage
     if (localStorage.getItem(user.uid) !== 'instructor') {
         $location.path('/student-main');
     } else {
+      // Broadcast role to navbar.js controller
       broadcastInstructorRole.broadcast("instructor");
     }
-    var responsesRef = Ref.child('responses'); // collection within the database.
-    var triggerRef = Ref.child('trigger');
 
-    $scope.trigger = $firebaseObject(triggerRef);
+    // This is firebase responses table url
+    var responsesRef = Ref.child('responses');
     var responsesObj = $firebaseObject(responsesRef);
     $scope.responses = responsesObj;
+
+    // This is the trigger when instructor press startNew, all students 
+    // go to thumbs check view. 
+    var triggerRef = Ref.child('trigger');
+    $scope.trigger = $firebaseObject(triggerRef);
+    
+    // Counts summary as: [up,middle,down]
     $scope.result = [];
     
-    // calculate total votes for each category
-    // Populate list of students githubID for each catergory
+    // watch firebase responses, upon change, update counts and studentList
+    responsesObj.$watch(function(){
+      // console.log('watch');
+      results = $scope.total();
+      $scope.result = results[0];
+      $scope.studentList = results[1];
+    });
+
+    
+    // calculate total votes for each category into result
+    // Populate list of students githubID for each catergory into studentList
+    // as studentList = {up:[], down:[],middle:[]};
     $scope.total = function(){
       var result = [0,0,0];
       var studentList = {up:[], down:[],middle:[]};
@@ -30,41 +48,33 @@ angular.module('thumbsCheckApp')
           enumerable: false
         });
 
-        // for (var i = 0; i < keys.length; i++){
-          for(var key in responses){
-            if (responses.hasOwnProperty(key)){
-              // console.log('key',key);
-              var response = responses[key][key];
-              if (response === 'up'){
-                result[0]+=1;
-                studentList.up.push(key);
-              } else if (response === 'middle'){
-                result[1]+=1;
-                studentList.middle.push(key);
-              } else if (response === 'down'){
-                result[2]+=1;
-                studentList.down.push(key);
-              } 
-            }
+        for(var key in responses){
+          if (responses.hasOwnProperty(key)){
+            // console.log('key',key);
+            var response = responses[key][key];
+            if (response === 'up'){
+              result[0]+=1;
+              studentList.up.push(key);
+            } else if (response === 'middle'){
+              result[1]+=1;
+              studentList.middle.push(key);
+            } else if (response === 'down'){
+              result[2]+=1;
+              studentList.down.push(key);
+            } 
+          }
 
         }
       });
-
 
       // console.log('inside total:',result);
       return [result, studentList];
     };
 
-    responsesObj.$watch(function(){
-      // console.log('watch');
-      results = $scope.total();
-      $scope.result = results[0];
-      $scope.studentList = results[1];
-    });
 
     $scope.pickRandom = function(array) {
-      // If this category empty, don't proceed pick a student
       // console.log('pickRandom', array);
+      // If this category empty, don't proceed pick a student
       if (array.length === 0){return;}
       // Generate a url path to github avatar 
       var path = "https://avatars0.githubusercontent.com/u/";
