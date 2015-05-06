@@ -20,11 +20,12 @@ angular.module('thumbsCheckApp')
     
     // Counts summary as: [up,middle,down]
     $scope.result = [];
-    
+
     // watch firebase responses, upon change, update counts and studentList
     responsesObj.$watch(function(){
       // console.log('watch');
       results = $scope.total();
+      // console.log('results', results);
       $scope.result = results[0];
       $scope.studentList = results[1];
     });
@@ -34,9 +35,12 @@ angular.module('thumbsCheckApp')
     // Populate list of students githubID for each catergory into studentList
     // as studentList = {up:[], down:[],middle:[]};
     $scope.total = function(){
+      // Counts summary for [up,middle,down]
       var result = [0,0,0];
+      // for input of $scope.pickRandom()
       var studentList = {up:[], down:[],middle:[]};
       responsesObj.$loaded().then(function(responses){
+        // console.log('responses:', responses);
         // Make key: $id and $priority non-enumerable
         Object.defineProperty(responses, '$id', {
           enumerable: false
@@ -51,19 +55,25 @@ angular.module('thumbsCheckApp')
         for(var key in responses){
           if (responses.hasOwnProperty(key)){
             // console.log('key',key);
-            var response = responses[key][key];
-            if (response === 'up'){
-              result[0]+=1;
-              studentList.up.push(key);
-            } else if (response === 'middle'){
-              result[1]+=1;
-              studentList.middle.push(key);
-            } else if (response === 'down'){
-              result[2]+=1;
-              studentList.down.push(key);
-            } 
+            var response = responses[key];
+            // After reset(), on responses obj, there is a key value pair ($value:null)
+            if (response === null){
+              // Return upon empty responses
+              return [result, studentList];
+            } else {
+              response = response[key];
+              if (response === 'up'){
+                result[0]+=1;
+                studentList.up.push(key);
+              } else if (response === 'middle'){
+                result[1]+=1;
+                studentList.middle.push(key);
+              } else if (response === 'down'){
+                result[2]+=1;
+                studentList.down.push(key);
+              } 
+            }
           }
-
         }
       });
 
@@ -93,6 +103,16 @@ angular.module('thumbsCheckApp')
           name: students[uid],
           imageUrl: path
         };
+      });
+    };
+
+    // Reset firebase responses table
+    $scope.reset = function(){
+      responsesObj.$remove().then(function(ref) {
+        // data has been deleted locally and in Firebase
+        console.log('reset');
+      }, function(error) {
+        console.log("Error:", error);
       });
     };
 
