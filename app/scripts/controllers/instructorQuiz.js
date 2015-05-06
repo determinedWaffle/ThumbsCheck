@@ -126,13 +126,20 @@ angular.module('thumbsCheckApp')
     };
 
 
+
     /*Accordion*/
+    // Show only one quiz at a time
+    $scope.oneAtATime = true;
     $scope.pushQuiz = function(quiz){
-      console.log('clicked', quiz);
+      // console.log('clicked', quiz);
       var newQuizRef = Ref.child('newQuiz');
       var newQuizObj = $firebaseObject(newQuizRef);
       newQuizObj.quiz = quiz;
       newQuizObj.$save();
+
+      // quiz trigger
+      var triggerRef = Ref.child('quizTrigger');
+      $scope.quizTrigger = $firebaseObject(triggerRef);
     };
 
 });

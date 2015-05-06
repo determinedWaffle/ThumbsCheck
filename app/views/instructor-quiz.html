@@ -21,7 +21,7 @@ this is instructor quiz view.
     
     <accordion-group>
     <accordion-heading>
-    <button ng-click="pushQuiz(quiz)">Push Quiz</button>
+    <button type="button" class="btn btn-primary" ng-model="quizTrigger.val" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-change="quizTrigger.$save()" ng-click="pushQuiz(quiz)">Push Quiz</button>
     {{quiz.question}}
     </accordion-heading>
     <ul ng-repeat="choice in quiz.choices track by $index">
