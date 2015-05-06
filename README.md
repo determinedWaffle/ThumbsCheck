@@ -15,7 +15,8 @@
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
+    1. [Set up Firebase](#set-up-firebase)
+    1. [Start local server](#start-local-server)
 1. [Team](#team)
 1. [Contributing](#contributing)
 
@@ -42,6 +43,8 @@ From within the root directory:
 ```sh
 npm install -g grunt-cli
 npm install
+cd app
+bower install
 ```
 
 ### Set up Firebase
