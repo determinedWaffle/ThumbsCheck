@@ -1,10 +1,13 @@
 
+<!-- For testing purpose, should be deleted on production -->
+<button ng-click="thumbsTrigger = !thumbsTrigger">Toggle</button>
 
-<button ng-click="studentTrigger = !studentTrigger">Toggle</button>
-<div ng-show="studentTrigger">Waiting...</div>
 
-<div ng-hide="studentTrigger">
-Thumbs Pick
+
+<div ng-hide="thumbsTrigger" ng-init="thumbsTrigger=false">Waiting...</div>
+
+<div ng-show="thumbsTrigger">
+Thumbs Picked: 
 <div>{{ thumbsChoice }}</div>
 
 <div class="btn-group" ng-init="thumbsChoice='middle'">
