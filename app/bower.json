@@ -1,0 +1,30 @@
+{
+  "name": "thumbsCheckApp",
+  "version": "0.0.1",
+  "homepage": "https://github.com/determinedWaffle/determinedWaffle",
+  "authors": [
+    "Andy Sponring <asponring@gmail.com>"
+  ],
+  "description": "Enhanced real-time classroom interaction and analytics",
+  "main": "server.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "classroom",
+    "analytics"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularfire": "~1.1.1",
+    "bootstrap": "~3.3.4",
+    "angular-route": "~1.3.15"
+  }
+}

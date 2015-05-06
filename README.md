@@ -43,6 +43,8 @@ From within the root directory:
 ```sh
 npm install -g grunt-cli
 npm install
+cd app
+bower install
 ```
 
 ### Set up Firebase
