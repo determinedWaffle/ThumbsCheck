@@ -14,16 +14,11 @@ angular.module('thumbsCheckApp')
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .whenAuthenticated('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        redirectTo: '/instructor-main'
       })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
-      })
-      .when('/demo', {
-        templateUrl: 'views/demo.html',
-        controller: 'DemoCtrl'
       })
       .whenAuthenticated('/student-main', {
         templateUrl: 'views/student-main.html',

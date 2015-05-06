@@ -1,10 +1,12 @@
 angular.module('thumbsCheckApp')
-  .controller('InstructorCtrl', function($scope, $firebaseObject, Ref, $rootScope, $location){
-    // if ($rootScope.role !== 'instructor') {
-    //     $location.path('/student-main');
-    // }
+  .controller('InstructorCtrl', function($scope, $firebaseObject, $firebase, $rootScope, $location, user, broadcastInstructorRole){
+    if (localStorage.getItem(user.uid) !== 'instructor') {
+        $location.path('/student-main');
+    }
+    broadcastInstructorRole.broadcast("instructor");
     var responsesRef = Ref.child('responses'); // collection within the database.
     var triggerRef = Ref.child('trigger');
+
     $scope.trigger = $firebaseObject(triggerRef);
     var responesObj = $firebaseObject(responsesRef);
     $scope.responses = responesObj;
@@ -44,7 +46,7 @@ angular.module('thumbsCheckApp')
       return result;
     };
 
-    responesObj.$watch(function(){
+    responseObj.$watch(function(){
       // console.log('watch');
       $scope.result = $scope.total($scope.responses);
       $scope.studentList = $scope.generateStudentList($scope.responses);
