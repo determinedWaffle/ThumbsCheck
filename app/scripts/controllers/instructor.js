@@ -2,8 +2,9 @@ angular.module('thumbsCheckApp')
   .controller('InstructorCtrl', function($scope, $firebaseObject, Ref, $rootScope, $location, user, broadcastInstructorRole){
     if (localStorage.getItem(user.uid) !== 'instructor') {
         $location.path('/student-main');
+    } else {
+      broadcastInstructorRole.broadcast("instructor");
     }
-    broadcastInstructorRole.broadcast("instructor");
     var responsesRef = Ref.child('responses'); // collection within the database.
     var triggerRef = Ref.child('trigger');
 
