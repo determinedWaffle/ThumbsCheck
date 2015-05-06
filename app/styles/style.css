@@ -1,23 +1,30 @@
 div.imageFrame {
   min-height: 200px;
   width: 200px;
-  background-color: grey;
+  /*background-color: white;*/
 }
 
 div.imageFrame img {
   height: auto;
   width: 200px;
-
+}
+div.imageFrame p{
+  text-align: center;
 }
 
 body{
   /*background: url("../assets/concrete_seamless.png") repeat;*/
   /*background: url("../assets/subtle_white_mini_waves.png") repeat;*/
   /*background: url("../assets/school.png") repeat;*/
-  background: url("../assets/halftone.png") repeat;
+  /*background: url("../assets/halftone.png") repeat;*/
+  background: url("../assets/escheresque_ste.png") repeat;
   /*background: url("../assets/seamless_paper_texture.png") repeat;*/
 }
 
 a.navbar-brand{
   font-weight: bolder;
+}
+
+div.singleButton{
+  margin-top: 1em;
 }

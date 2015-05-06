@@ -1,13 +1,35 @@
-<div class='col-lg-6 col-lg-offset-3'>
-this is instructor view.
+<div class='jumbotron'>
+<h2>Instructor Operations</h2>
 
-<div>{{ radioModel }}</div>
+  <div>{{ radioModel }}</div>
 
-<div class="btn-group">
-  <a class="btn btn-primary" ng-model="radioModel" btn-radio="'thumbs'" href='#/instructor-thumbs'>Thumbs Check</a>
-  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'quiz'">Mini-quiz</label>
-  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'results'">Previous Results</label>
-</div>
+  <div class="btn-group btn-group-justified btn-group-lg hidden-sm hidden-xs">
+    <!-- <a class="btn btn-primary btn-lg" ng-model="radioModel" btn-radio="'thumbs'" href='#/instructor-thumbs'>Thumbs Check</a> -->
+    <a href='#/instructor-thumbs' class="btn btn-primary btn-lg" ng-model="radioModel" btn-radio="'thumbs'">
+      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Thumbs Check 
+    </a>
+    <label class="btn btn-primary btn-lg" ng-model="radioModel" btn-radio="'quiz'">
+      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Mini-quiz
+    </label>
+    <label class="btn btn-primary btn-lg" ng-model="radioModel" btn-radio="'results'">
+      <span class="glyphicon glyphicon-open" aria-hidden="true"></span> Previous Results (Coming soon)
+    </label>
+  </div>
 
-<button ng-click="reset()">Reset</button>
+<!-- Vertical button group, visible only for sm and xs screens -->
+  <div class="btn-group-vertical btn-group-lg visible-sm visible-xs hidden-md hidden-lg">
+    <a href='#/instructor-thumbs' class="btn btn-primary btn-lg" ng-model="radioModel" btn-radio="'thumbs'">
+      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Thumbs Check 
+    </a>
+    <label class="btn btn-primary btn-lg" ng-model="radioModel" btn-radio="'quiz'">
+      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Mini-quiz
+    </label>
+    <label class="btn btn-primary btn-lg" ng-model="radioModel" btn-radio="'results'">
+      <span class="glyphicon glyphicon-open" aria-hidden="true"></span> Previous Results (Coming soon)
+    </label>
+  </div>
+
+  <div class='singleButton'>
+  <button class="btn btn-lg" ng-click="reset()" class="clearfix">Reset</button>
+  </div>
 </div>
