@@ -58,6 +58,9 @@ angular.module('thumbsCheckApp')
       newQuizObj.quiz = quiz;
       newQuizObj.$save();
 
+      // Remove the quizResponses table
+      $firebaseObject(Ref.child('quizResponses')).$remove();
+
       // Initlize variables for $scope.total()
       $scope.numberOfChoice = quiz.choices.length;
       $scope.quizData = quiz;
