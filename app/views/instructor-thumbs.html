@@ -1,25 +1,41 @@
+<div class='jumbotron'>
 <!-- Instructor Thumbs View -->
-<div class="imageFrame" ng-init="pickedStudent.imageUrl='https://avatars3.githubusercontent.com/u/7408826?v=3&s=140'">
-  <img ng-src={{pickedStudent.imageUrl}} alt="Github avatar">
+<div class="imageFrame center-block" ng-init="pickedStudent.imageUrl='assets/placeholder-hi.png'">
+  <img ng-src={{pickedStudent.imageUrl}} alt="Github avatar" class='img-rounded'>
   <p>{{pickedStudent.name}}</p>
 </div>
 
-<div class="btn-group">
-  <button ng-click="pickRandom(studentList.up)" type="button" class="btn btn-default btn-lg">
+<div class="btn-group btn-group-justified btn-group-lg hidden-sm hidden-xs">
+  <label ng-click="pickRandom(studentList.up)" type="button" class="btn btn-primary btn-lg" data-toggle="tooltip" data-placement="bottom" title="Pick a random student">
     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> {{result[0]}}
-  </button>
-  <button ng-click="pickRandom(studentList.middle)" type="button" class="btn btn-default btn-lg">
+  </label>
+  <label ng-click="pickRandom(studentList.middle)" type="label" class="btn btn-primary btn-lg">
     <span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span> {{result[1]}}
-  </button>
-  <button ng-click="pickRandom(studentList.down)" type="button" class="btn btn-default btn-lg">
+  </label>
+  <label ng-click="pickRandom(studentList.down)" type="label" class="btn btn-primary btn-lg">
     <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> {{result[2]}}
-  </button>
+  </label>
 </div>
 
-<div>
-  <button type="button" class="btn btn-primary" ng-model="trigger.val" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-change="trigger.$save()" ng-click="reset()">
+<!-- Vertical button group, visible only for sm and xs screens -->
+<div class="btn-group-vertical btn-group-lg visible-sm visible-xs hidden-md hidden-lg">
+  <label ng-click="pickRandom(studentList.up)" type="button" class="btn btn-primary btn-lg">
+    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> {{result[0]}}
+  </label>
+  <label ng-click="pickRandom(studentList.middle)" type="label" class="btn btn-primary btn-lg">
+    <span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span> {{result[1]}}
+  </label>
+  <label ng-click="pickRandom(studentList.down)" type="label" class="btn btn-primary btn-lg">
+    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> {{result[2]}}
+  </label>
+</div>
+
+
+<div class="singleButton">
+  <button type="button" class="btn btn-lg" ng-model="trigger.val" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-change="trigger.$save()">
       Start New
   </button>
 </div>
 
-<!-- {{responses}} -->
+{{responses}}
+</div>
