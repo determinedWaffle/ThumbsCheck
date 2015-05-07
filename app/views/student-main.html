@@ -10,6 +10,16 @@
   </div>
 
 
+  <div ng-if="quizTrigger" ng-init="quizTrigger = false">
+    <p>testing quiz</p>
+    <div>
+      Question: {{ quiz.question }} <br/>
+      <div class="btn-group" ng-repeat="choice in quiz.choices track by $index">
+        <label class="btn btn-primary" ng-model="quizChoice" btn-radio="choice" ng-click="submitQuizChoice($index)">{{choice}}</label>
+      </div>
+    </div>
+  </div>
+
   <div  ng-show="thumbsTrigger">
     Thumbs Picked: 
     <div>{{ thumbsChoice }}</div>
@@ -24,16 +34,6 @@
       <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'down'" ng-click="clicked('down')">
         <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Down
       </label>
-    </div>
-
-    <div ng-if="quizTrigger" ng-init="quizTrigger = false">
-      <p>testing quiz</p>
-      <div>
-        Question: {{ quiz.question }} <br/>
-        <div class="btn-group" ng-repeat="choice in quiz.choices track by $index">
-          <label class="btn btn-primary" ng-model="quizChoice" btn-radio="choice" ng-click="submitQuizChoice($index)">{{choice}}</label>
-        </div>
-      </div>
     </div>
 
 
