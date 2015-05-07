@@ -3,7 +3,7 @@ angular.module('thumbsCheckApp')
     // Refactor this firebase url to using Ref
     var triggerRef = Ref.child('trigger');
     $scope.uid = user.uid;
-    var studentResponseRef = Ref.child('responses').child(user.uid); // collection within the database.
+    // var studentResponseRef = Ref.child('responses').child(user.uid); // collection within the database.
     
     var trigObj = $firebaseObject(triggerRef);
     trigObj.$loaded().then(function(data){
@@ -35,6 +35,7 @@ angular.module('thumbsCheckApp')
     $scope.clicked = function(thumbsChoice){
       console.log('clicked');
       $scope.studentTrigger = !$scope.studentTrigger;
+      var studentResponseRef = Ref.child('responses').child(user.uid); // collection within the database.
       var obj = $firebaseObject(studentResponseRef);
       obj.$loaded().then(function(data){
         obj[$scope.uid] = thumbsChoice;
