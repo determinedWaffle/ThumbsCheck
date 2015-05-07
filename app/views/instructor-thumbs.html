@@ -32,10 +32,9 @@
 
 
 <div class="singleButton">
-  <button type="button" class="btn btn-lg" ng-model="trigger.val" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-change="trigger.$save()">
+  <button type="button" class="btn btn-lg" ng-model="trigger.val" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="reset()" ng-change="trigger.$save()">
       Start New
   </button>
 </div>
 
-{{responses}}
 </div>

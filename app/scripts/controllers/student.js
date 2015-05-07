@@ -32,12 +32,12 @@ angular.module('thumbsCheckApp')
       $scope.quiz = quiz;
     });
 
-    $scope.clicked = function(){
+    $scope.clicked = function(thumbsChoice){
       console.log('clicked');
       $scope.studentTrigger = !$scope.studentTrigger;
       var obj = $firebaseObject(studentResponseRef);
       obj.$loaded().then(function(data){
-        obj[$scope.uid] = $scope.thumbsChoice;
+        obj[$scope.uid] = thumbsChoice;
         obj.$save().then(function(ref) {
             console.log("Success");
             // ref.key() === obj.$id; // true

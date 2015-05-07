@@ -15,13 +15,13 @@
     <div>{{ thumbsChoice }}</div>
     <h2>Thumbs check!</h2>
     <div class="btn-group btn-group-justified btn-group-lg hidden-sm hidden-xs" ng-init="thumbsChoice='middle'">
-      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'up'" ng-click="clicked()">
+      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'up'" ng-click="clicked('up')">
         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Up
       </label>
-      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'middle'" ng-click="clicked()">
+      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'middle'" ng-click="clicked('middle')">
         <span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span> Middle
       </label>
-      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'down'" ng-click="clicked()">
+      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'down'" ng-click="clicked('down')">
         <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Down
       </label>
     </div>
@@ -39,13 +39,13 @@
 
 <!-- Vertical button group, visible only for sm and xs screens -->
     <div class="btn-group-vertical btn-group-lg visible-sm visible-xs hidden-md hidden-lg" ng-init="thumbsChoice='middle'">
-      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'up'" ng-click="clicked()">
+      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'up'" ng-click="clicked('up')">
         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Up
       </label>
-      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'middle'" ng-click="clicked()">
+      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'middle'" ng-click="clicked('middle')">
         <span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span> Middle
       </label>
-      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'down'" ng-click="clicked()">
+      <label class="btn btn-primary" ng-model="thumbsChoice" btn-radio="'down'" ng-click="clicked('down')">
         <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Down
       </label>
     </div>
