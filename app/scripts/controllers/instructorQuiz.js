@@ -71,14 +71,14 @@ angular.module('thumbsCheckApp')
     var quizResponsesObj = $firebaseObject(quizResponsesRef);
     $scope.quizResponses = quizResponsesObj;
     // watch firebase responses, upon change, update counts and studentList
-    // quizResponsesObj.$loaded().then(function(){
+    quizResponsesObj.$loaded().then(function(){
       quizResponsesObj.$watch(function(){
         // console.log('watch');
         results = $scope.total();
         // $scope.quizResult = results[0];
         // $scope.studentList = results[1];
       });
-    // });
+    });
 
     
     // calculate total votes for each category into result
