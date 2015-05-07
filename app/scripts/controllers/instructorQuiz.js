@@ -64,6 +64,7 @@ angular.module('thumbsCheckApp')
       // Initlize variables for $scope.total()
       $scope.numberOfChoice = quiz.choices.length;
       $scope.quizData = quiz;
+      $scope.stacked = [];
     };
 
     // Quiz Response
