@@ -26,6 +26,16 @@
       </label>
     </div>
 
+    <div ng-if="quizTrigger" ng-init="quizTrigger = false">
+      <p>testing quiz</p>
+      <div>
+        Question: {{ quiz.question }} <br/>
+        <div class="btn-group" ng-repeat="choice in quiz.choices track by $index">
+          <label class="btn btn-primary" ng-model="quizChoice" btn-radio="choice" ng-click="submitQuizChoice($index)">{{choice}}</label>
+        </div>
+      </div>
+    </div>
+
 
 <!-- Vertical button group, visible only for sm and xs screens -->
     <div class="btn-group-vertical btn-group-lg visible-sm visible-xs hidden-md hidden-lg" ng-init="thumbsChoice='middle'">
@@ -41,6 +51,7 @@
     </div>
 
   </div>
-  {{uid}}
+
 
 </div>
+

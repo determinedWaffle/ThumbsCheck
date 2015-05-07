@@ -15,6 +15,23 @@ angular.module('thumbsCheckApp')
       });
     });
 
+    var quizTriggerRef = Ref.child('quizTrigger');
+    var quizTrigObj = $firebaseObject(quizTriggerRef);
+    quizTrigObj.$loaded().then(function(data){
+      console.log('data loaded');
+      quizTrigObj.$watch(function() {
+        console.log('quiz watch');
+        $scope.quizTrigger = true;
+      });
+    });
+
+    var newQuizRef = Ref.child('newQuiz').child('quiz');
+    var newQuizObj = $firebaseObject(newQuizRef);
+
+    newQuizObj.$loaded().then(function(quiz){
+      $scope.quiz = quiz;
+    });
+
     $scope.clicked = function(){
       console.log('clicked');
       $scope.studentTrigger = !$scope.studentTrigger;
@@ -29,4 +46,23 @@ angular.module('thumbsCheckApp')
           });
         });
       };
+
+    var quizResponsesRef = Ref.child('quizResponses').child(user.uid);
+    var quizResponsesObj = $firebaseObject(quizResponsesRef);
+    $scope.submitQuizChoice = function(choice){
+      console.log('submitQuizChoice:',choice);
+      quizResponsesObj.$loaded().then(function(data){
+        quizResponsesObj[$scope.uid] = choice;
+        quizResponsesObj.$save().then(function(ref){
+          console.log("Success");
+        }, function(error){
+          console.log("Error:", error)
+        });
+      });
+    };
+
+
   });
+
+
+

@@ -1,19 +1,6 @@
 this is instructor quiz view.
-<form ng-submit="addQuiz(question, choices)">
-  <div class="form-group">
-    <label for="question">Question</label>
-    <input ng-model="question" type="text" class="form-control" id="question" placeholder="Please enter a question" required />
-    <label for="choices">Choices</label>
+<progress><bar ng-repeat="bar in stacked track by $index" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%-{{bar.choice}}</span></bar></progress>
 
-    <button ng-click="add()">Add</button>
-    <div>
-      <ol ng-repeat="choice in choices track by $index">
-        <li><button ng-click="remove($index)">[-]</button><input ng-model="choice" ng-change="saveChange($index, choice)" type="text" class="form-control" placeholder="Please enter choices" required /> {{ choice }} {{$index}} </li>
-      </ol>
-    </div>
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
 
 <accordion close-others="oneAtATime">
 
@@ -31,3 +18,19 @@ this is instructor quiz view.
   </div>
 
 </accordion>
+
+<form ng-submit="addQuiz(question, choices)">
+  <div class="form-group">
+    <label for="question">Question</label>
+    <input ng-model="question" type="text" class="form-control" id="question" placeholder="Please enter a question" required />
+    <label for="choices">Choices</label>
+
+    <button ng-click="add()">Add</button>
+    <div>
+      <ol ng-repeat="choice in choices track by $index">
+        <li><button ng-click="remove($index)">[-]</button><input ng-model="choice" ng-change="saveChange($index, choice)" type="text" class="form-control" placeholder="Please enter choices" required /> {{ choice }} {{$index}} </li>
+      </ol>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
