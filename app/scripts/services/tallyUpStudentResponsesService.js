@@ -18,10 +18,12 @@ angular.module('thumbsCheckApp')
       for (var key in responses) {
         if (responses.hasOwnProperty(key)) {
           if (quizCounts !== undefined && result === undefined) {
-            response = responses[key][key];
-            console.log('response', response);
-            quizCounts[response] += 1;
-            studentList[response].push(key);
+            if (responses[key] !== null) {
+              response = responses[key][key];
+              console.log('response', response);
+              quizCounts[response] += 1;
+              studentList[response].push(key);
+            } 
           } else {
             var response = valueResponses[key];
             // After reset(), on responses obj, there is a key value pair ($value:null)
