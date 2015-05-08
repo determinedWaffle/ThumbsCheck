@@ -7,7 +7,7 @@ angular.module('thumbsCheckApp')
     
     var trigObj = $firebaseObject(triggerRef);
     trigObj.$loaded().then(function(data){
-      console.log('data loaded');
+      //console.log('data loaded');
       trigObj.$watch(function() {
         console.log('watch', $scope.thumbsTrigger);
         $scope.thumbsTrigger = true;
@@ -18,9 +18,9 @@ angular.module('thumbsCheckApp')
     var quizTriggerRef = Ref.child('quizTrigger');
     var quizTrigObj = $firebaseObject(quizTriggerRef);
     quizTrigObj.$loaded().then(function(data){
-      console.log('data loaded');
+      //console.log('data loaded');
       quizTrigObj.$watch(function() {
-        console.log('quiz watch');
+        //console.log('quiz watch');
         $scope.quizTrigger = true;
       });
     });
