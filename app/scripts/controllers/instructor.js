@@ -1,11 +1,11 @@
 angular.module('thumbsCheckApp')
-  .controller('InstructorCtrl', function($scope, $firebaseObject, Ref, $rootScope, $location, user, broadcastInstructorRole){
+  .controller('InstructorCtrl', function($scope, $firebaseObject, Ref, $rootScope, $location, user, broadcastInstructorRole, pickRandomService) {
     // To get userID.role from web browser localStorage
     if (localStorage.getItem(user.uid) !== 'instructor') {
-        $location.path('/student-main');
+      $location.path('/student-main');
     } else {
       // Broadcast role to navbar.js controller
-      broadcastInstructorRole.broadcast("instructor");
+      broadcastInstructorRole.broadcast('instructor');
     }
 
     // This is firebase responses table url
@@ -17,12 +17,13 @@ angular.module('thumbsCheckApp')
     // go to thumbs check view. 
     var triggerRef = Ref.child('trigger');
     $scope.trigger = $firebaseObject(triggerRef);
-    
+
     // Counts summary as: [up,middle,down]
     $scope.result = [];
 
     // watch firebase responses, upon change, update counts and studentList
-    responsesObj.$watch(function(){
+    var results;
+    responsesObj.$watch(function() {
       // console.log('watch');
       results = $scope.total();
       // console.log('results', results);
@@ -30,16 +31,20 @@ angular.module('thumbsCheckApp')
       $scope.studentList = results[1];
     });
 
-    
+
     // calculate total votes for each category into result
     // Populate list of students githubID for each catergory into studentList
     // as studentList = {up:[], down:[],middle:[]};
-    $scope.total = function(){
+    $scope.total = function() {
       // Counts summary for [up,middle,down]
-      var result = [0,0,0];
+      var result = [0, 0, 0];
       // for input of $scope.pickRandom()
-      var studentList = {up:[], down:[],middle:[]};
-      responsesObj.$loaded().then(function(responses){
+      var studentList = {
+        up: [],
+        down: [],
+        middle: []
+      };
+      responsesObj.$loaded().then(function(responses) {
         // console.log('responses:', responses);
         // Make key: $id and $priority non-enumerable
         Object.defineProperty(responses, '$id', {
@@ -52,26 +57,26 @@ angular.module('thumbsCheckApp')
           enumerable: false
         });
 
-        for(var key in responses){
-          if (responses.hasOwnProperty(key)){
+        for (var key in responses) {
+          if (responses.hasOwnProperty(key)) {
             // console.log('key',key);
             var response = responses[key];
             // After reset(), on responses obj, there is a key value pair ($value:null)
-            if (response === null){
+            if (response === null) {
               // Return upon empty responses
               return [result, studentList];
             } else {
               response = response[key];
-              if (response === 'up'){
-                result[0]+=1;
+              if (response === 'up') {
+                result[0] += 1;
                 studentList.up.push(key);
-              } else if (response === 'middle'){
-                result[1]+=1;
+              } else if (response === 'middle') {
+                result[1] += 1;
                 studentList.middle.push(key);
-              } else if (response === 'down'){
-                result[2]+=1;
+              } else if (response === 'down') {
+                result[2] += 1;
                 studentList.down.push(key);
-              } 
+              }
             }
           }
         }
@@ -82,37 +87,29 @@ angular.module('thumbsCheckApp')
     };
 
 
-    $scope.pickRandom = function(array) {
-      // console.log('pickRandom', array);
-      // If this category empty, don't proceed pick a student
-      if (array.length === 0){return;}
-      // Generate a url path to github avatar 
-      var path = "https://avatars0.githubusercontent.com/u/";
-      var index = Math.floor(Math.random() * array.length);
-      path += array[index].split(":")[1];
-      path += "?size=1028";
-      var uid = array[index];
-      // console.log('uid',uid);
-      // Retrieve studentName from firebase "students", then generate the pickedStudent object
+    $scope.pickRandom = function(studentList) {
+      var randomStudentInfo;
+      randomStudentInfo = pickRandomService.pickRandomStudent(studentList);
+
       var studentRef = Ref.child('students');
-      $firebaseObject(studentRef).$loaded().then(function(students){
-        // console.log('studentsTable', students);
-        $scope.studentName = students[uid];
-        // console.log('studentName', $scope.studentName);
+
+      // Retrieve studentName from firebase "students", then generate the pickedStudent object
+      $firebaseObject(studentRef).$loaded().then(function(students) {
+        $scope.studentName = students[randomStudentInfo.uid];
         $scope.pickedStudent = {
-          name: students[uid],
-          imageUrl: path
+          name: students[randomStudentInfo.uid],
+          imageUrl: randomStudentInfo.path
         };
       });
     };
 
     // Reset firebase responses table
-    $scope.reset = function(){
-      responsesObj.$remove().then(function(ref) {
+    $scope.reset = function() {
+      responsesObj.$remove().then(function() {
         // data has been deleted locally and in Firebase
         console.log('reset');
       }, function(error) {
-        console.log("Error:", error);
+        console.log('Error:', error);
       });
     };
 
