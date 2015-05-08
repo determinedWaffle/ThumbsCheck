@@ -13,15 +13,20 @@ angular.module('thumbsCheckApp')
 
 
     // This is firebase responses table url
-    var responsesRef = Ref.child('responses');
-    var responsesObj = $firebaseObject(responsesRef);
-    $scope.responses = responsesObj;
+    //var responsesRef = Ref.child('responses');
+    //var responsesObj = $firebaseObject(responsesRef);
+    //$scope.responses = responsesObj;
+      var responsesObj = Ref.createFirebaseRef('responses');
+      $scope.responses = responsesObj;
+
 
     // This is the trigger when instructor press startNew, all students 
     // go to thumbs check view. 
-    var triggerRef = Ref.child('trigger');
-    $scope.trigger = $firebaseObject(triggerRef);
+      //var triggerRef = Ref.child('trigger');
+      //$scope.trigger = $firebaseObject(triggerRef);
 
+      var triggerRef = Ref.createFirebaseRef('trigger');
+      $scope.trigger = triggerRef;
     // Counts summary as: [up,middle,down]
     $scope.result = [];
 
@@ -62,11 +67,10 @@ angular.module('thumbsCheckApp')
     $scope.pickRandom = function(studentList) {
       var randomStudentInfo;
       randomStudentInfo = pickRandomService.pickRandomStudent(studentList);
-
-      var studentRef = Ref.child('students');
+      var studentRef = Ref.createFirebaseRef('students');
 
       // Retrieve studentName from firebase "students", then generate the pickedStudent object
-      $firebaseObject(studentRef).$loaded().then(function(students) {
+      studentRef.$loaded().then(function(students) {
         $scope.studentName = students[randomStudentInfo.uid];
         $scope.pickedStudent = {
           name: students[randomStudentInfo.uid],

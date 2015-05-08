@@ -12,7 +12,7 @@ angular.module('thumbsCheckApp')
     };
 
     function addUser() {
-      Ref.onAuth(function(user) {
+      Ref.Ref(onAuth(function(user) {
         var instructorsObj = $firebaseObject(Ref.child('instructors'));
         var studentObj = $firebaseObject(Ref.child('students'));
         var userName;
@@ -31,7 +31,7 @@ angular.module('thumbsCheckApp')
             }
           });
         }
-      });
+      }));
     }
 
     function showError(err) {
