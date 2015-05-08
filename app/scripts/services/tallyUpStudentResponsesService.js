@@ -25,7 +25,7 @@ angular.module('thumbsCheckApp')
               studentList[response].push(key);
             } 
           } else {
-            var response = valueResponses[key];
+            var response = responses[key];
             // After reset(), on responses obj, there is a key value pair ($value:null)
             if (response === null) {
               // Return upon empty responses
