@@ -1,5 +1,5 @@
 angular.module('thumbsCheckApp')
-  .controller('QuizCtrl', function($scope, $firebaseObject, $firebaseArray, Ref, user, verifyInstructorService) {
+  .controller('QuizCtrl', function($scope, $firebaseObject, $firebaseArray, Ref, user, verifyInstructorService, tallyUpStudentResponsesService, pickRandomService) {
     // To get userID.role from web browser localStorage
     //if (localStorage.getItem(user.uid) !== 'instructor') {
     //  $location.path('/student-main');
@@ -53,12 +53,11 @@ angular.module('thumbsCheckApp')
     // Show only one quiz at a time
     $scope.oneAtATime = true;
     $scope.pushQuiz = function(quiz) {
-      // console.log('clicked', quiz);
+      console.log('clicked', quiz);
       var newQuizRef = Ref.child('newQuiz');
       var newQuizObj = $firebaseObject(newQuizRef);
       newQuizObj.quiz = quiz;
       newQuizObj.$save();
-
       // Remove the quizResponses table
       $firebaseObject(Ref.child('quizResponses')).$remove();
 
@@ -75,8 +74,8 @@ angular.module('thumbsCheckApp')
     // watch firebase responses, upon change, update counts and studentList
     quizResponsesObj.$loaded().then(function() {
       quizResponsesObj.$watch(function() {
-        // console.log('watch');
-        results = $scope.total();
+        // console.log('watch');  var delayInMs = 2000;
+          results = $scope.total();
         // $scope.quizResult = results[0];
         // $scope.studentList = results[1];
       });
@@ -100,33 +99,12 @@ angular.module('thumbsCheckApp')
       // console.log('studentList',studentList);
       quizResponsesObj.$loaded().then(function(responses) {
         // console.log('responses:', responses);
-
-        // Make key: $id and $priority non-enumerable
-        Object.defineProperty(responses, '$id', {
-          enumerable: false
-        });
-        Object.defineProperty(responses, '$priority', {
-          enumerable: false
-        });
-        Object.defineProperty(responses, '$$conf', {
-          enumerable: false
-        });
-
-        for (var key in responses) {
-          if (responses.hasOwnProperty(key)) {
-            // console.log('key',key);
-            var response = responses[key][key];
-            // console.log('choice index', response);
-            // console.log('type',typeof response);
-            quizCounts[response] += 1;
-            studentList[response].push(key);
-          }
-        }
-
+        tallyUpStudentResponsesService.tallyUpResponses(responses, undefined, studentList, quizCounts);
         // debugger;
+        console.log(quizCounts);
         $scope.populateProgressBar(quizCounts);
         $scope.studentList = studentList;
-        // console.log('quizCounts before return', quizCounts);
+        console.log('quizCounts before return', quizCounts);
         // console.log('studentList', studentList);
       });
     };
