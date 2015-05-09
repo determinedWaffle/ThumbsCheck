@@ -1,8 +1,9 @@
 angular.module('thumbsCheckApp')
-  .controller('LoginCtrl', function($scope, $location, $firebaseObject, $rootScope, Auth, Ref) {
+  .controller('LoginCtrl', function($scope, $firebaseObject, Auth, Ref, verifyInstructorService) {
     if (Auth.$getAuth()) {
-      $location.path('/');
+      verifyInstructorService.redirectHome();
     }
+
     $scope.oauthLogin = function(provider) {
       $scope.err = null;
       Auth.$authWithOAuthPopup(provider, {
@@ -19,14 +20,13 @@ angular.module('thumbsCheckApp')
           instructorsObj.$loaded().then(function(instructorsTable) {
             if (instructorsTable[user.uid]) {
               user.role = 'instructor';
-              localStorage.setItem(user.uid, 'instructor');
-              $location.path('/instructor-main');
+              verifyInstructorService.setInLocalStorage(user.uid, user.role);
             } else {
               studentObj.$loaded().then(function(usersTable) {
                 userName = user.github.displayName || 'Please fill in your name, ' + user.github.username;
                 studentObj[user.uid] = userName;
                 studentObj.$save();
-                $location.path('/student-main');
+                verifyInstructorService.verifyIfInstructor(user.uid);
               });
             }
           });

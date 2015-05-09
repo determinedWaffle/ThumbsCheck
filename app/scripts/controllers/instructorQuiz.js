@@ -1,12 +1,13 @@
 angular.module('thumbsCheckApp')
-  .controller('QuizCtrl', function($scope, $firebaseObject, $firebaseArray, Ref, $rootScope, $location, user, broadcastInstructorRole) {
+  .controller('QuizCtrl', function($scope, $firebaseObject, $firebaseArray, Ref, user, verifyInstructorService) {
     // To get userID.role from web browser localStorage
-    if (localStorage.getItem(user.uid) !== 'instructor') {
-      $location.path('/student-main');
-    } else {
-      // Broadcast role to navbar.js controller
-      broadcastInstructorRole.broadcast('instructor');
-    }
+    //if (localStorage.getItem(user.uid) !== 'instructor') {
+    //  $location.path('/student-main');
+    //} else {
+    //  // Broadcast role to navbar.js controller
+    //  broadcastInstructorRole.broadcast('instructor');
+    //}
+    verifyInstructorService.verifyIfInstructor(user.uid);
 
 
     /*Quiz*/
