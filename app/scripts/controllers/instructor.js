@@ -1,41 +1,26 @@
 angular.module('thumbsCheckApp')
   .controller('InstructorCtrl', function($scope, $firebaseObject, Ref, user, pickRandomService, verifyInstructorService, tallyUpStudentResponsesService) {
     // To get userID.role from web browser localStorage
-    //    if (localStorage.getItem(user.uid) !== 'instructor') {
-    //      $location.path('/student-main');
-    //    } else {
-    //      // Broadcast role to navbar.js controller
-    //      broadcastInstructorRole.broadcast('instructor');
-    //    }
-    //
-
     verifyInstructorService.verifyIfInstructor(user.uid);
 
 
     // This is firebase responses table url
-    //var responsesRef = Ref.child('responses');
-    //var responsesObj = $firebaseObject(responsesRef);
-    //$scope.responses = responsesObj;
-      var responsesObj = Ref.createFirebaseRef('responses');
-      $scope.responses = responsesObj;
-
+    var responsesRef = Ref.child('responses');
+    var responsesObj = $firebaseObject(responsesRef);
+    $scope.responses = responsesObj;
 
     // This is the trigger when instructor press startNew, all students 
     // go to thumbs check view. 
-      //var triggerRef = Ref.child('trigger');
-      //$scope.trigger = $firebaseObject(triggerRef);
+    var triggerRef = Ref.child('trigger');
+    $scope.trigger = $firebaseObject(triggerRef);
 
-      var triggerRef = Ref.createFirebaseRef('trigger');
-      $scope.trigger = triggerRef;
     // Counts summary as: [up,middle,down]
     $scope.result = [];
 
     // watch firebase responses, upon change, update counts and studentList
     var results;
     responsesObj.$watch(function() {
-      // console.log('watch');
       results = $scope.total();
-      // console.log('results', results);
       $scope.result = results[0];
       $scope.studentList = results[1];
     });
@@ -45,10 +30,10 @@ angular.module('thumbsCheckApp')
     // Populate list of students githubID for each catergory into studentList
     // as studentList = {up:[], down:[],middle:[]};
     $scope.total = function() {
-      
+
       // Counts summary for [up,middle,down]
       var result = [0, 0, 0];
-       
+
       // for input of $scope.pickRandom()
       var studentList = {
         up: [],
@@ -66,11 +51,11 @@ angular.module('thumbsCheckApp')
 
     $scope.pickRandom = function(studentList) {
       var randomStudentInfo;
+      var studentRef = Ref.child('students');
       randomStudentInfo = pickRandomService.pickRandomStudent(studentList);
-      var studentRef = Ref.createFirebaseRef('students');
 
       // Retrieve studentName from firebase "students", then generate the pickedStudent object
-      studentRef.$loaded().then(function(students) {
+      $firebaseObject(studentRef).$loaded().then(function(students) {
         $scope.studentName = students[randomStudentInfo.uid];
         $scope.pickedStudent = {
           name: students[randomStudentInfo.uid],
@@ -83,7 +68,8 @@ angular.module('thumbsCheckApp')
     $scope.reset = function() {
       responsesObj.$remove().then(function() {
         // data has been deleted locally and in Firebase
-        console.log('reset');
+        $scope.pickedStudent.imageUrl = 'assets/placeholder-hi.png';
+        $scope.pickedStudent.name = '';
       }, function(error) {
         console.log('Error:', error);
       });
