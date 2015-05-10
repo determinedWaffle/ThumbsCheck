@@ -1,5 +1,5 @@
 angular.module('thumbsCheckApp')
-  .controller('InstructorCtrl', function($scope, $firebaseObject, Ref, user, pickRandomService, verifyInstructorService) {
+  .controller('InstructorCtrl', function($scope, $firebaseObject, Ref, user, pickRandomService, verifyInstructorService, tallyUpStudentResponsesService) {
     // To get userID.role from web browser localStorage
     //    if (localStorage.getItem(user.uid) !== 'instructor') {
     //      $location.path('/student-main');
@@ -13,15 +13,20 @@ angular.module('thumbsCheckApp')
 
 
     // This is firebase responses table url
-    var responsesRef = Ref.child('responses');
-    var responsesObj = $firebaseObject(responsesRef);
-    $scope.responses = responsesObj;
+    //var responsesRef = Ref.child('responses');
+    //var responsesObj = $firebaseObject(responsesRef);
+    //$scope.responses = responsesObj;
+      var responsesObj = Ref.createFirebaseRef('responses');
+      $scope.responses = responsesObj;
+
 
     // This is the trigger when instructor press startNew, all students 
     // go to thumbs check view. 
-    var triggerRef = Ref.child('trigger');
-    $scope.trigger = $firebaseObject(triggerRef);
+      //var triggerRef = Ref.child('trigger');
+      //$scope.trigger = $firebaseObject(triggerRef);
 
+      var triggerRef = Ref.createFirebaseRef('trigger');
+      $scope.trigger = triggerRef;
     // Counts summary as: [up,middle,down]
     $scope.result = [];
 
@@ -40,53 +45,21 @@ angular.module('thumbsCheckApp')
     // Populate list of students githubID for each catergory into studentList
     // as studentList = {up:[], down:[],middle:[]};
     $scope.total = function() {
+      
       // Counts summary for [up,middle,down]
       var result = [0, 0, 0];
+       
       // for input of $scope.pickRandom()
       var studentList = {
         up: [],
         down: [],
         middle: []
       };
-      responsesObj.$loaded().then(function(responses) {
-        // console.log('responses:', responses);
-        // Make key: $id and $priority non-enumerable
-        Object.defineProperty(responses, '$id', {
-          enumerable: false
-        });
-        Object.defineProperty(responses, '$priority', {
-          enumerable: false
-        });
-        Object.defineProperty(responses, '$$conf', {
-          enumerable: false
-        });
 
-        for (var key in responses) {
-          if (responses.hasOwnProperty(key)) {
-            // console.log('key',key);
-            var response = responses[key];
-            // After reset(), on responses obj, there is a key value pair ($value:null)
-            if (response === null) {
-              // Return upon empty responses
-              return [result, studentList];
-            } else {
-              response = response[key];
-              if (response === 'up') {
-                result[0] += 1;
-                studentList.up.push(key);
-              } else if (response === 'middle') {
-                result[1] += 1;
-                studentList.middle.push(key);
-              } else if (response === 'down') {
-                result[2] += 1;
-                studentList.down.push(key);
-              }
-            }
-          }
-        }
+      responsesObj.$loaded().then(function(responses) {
+        tallyUpStudentResponsesService.tallyUpResponses(responses, result, studentList);
       });
 
-      // console.log('inside total:',result);
       return [result, studentList];
     };
 
@@ -94,11 +67,10 @@ angular.module('thumbsCheckApp')
     $scope.pickRandom = function(studentList) {
       var randomStudentInfo;
       randomStudentInfo = pickRandomService.pickRandomStudent(studentList);
-
-      var studentRef = Ref.child('students');
+      var studentRef = Ref.createFirebaseRef('students');
 
       // Retrieve studentName from firebase "students", then generate the pickedStudent object
-      $firebaseObject(studentRef).$loaded().then(function(students) {
+      studentRef.$loaded().then(function(students) {
         $scope.studentName = students[randomStudentInfo.uid];
         $scope.pickedStudent = {
           name: students[randomStudentInfo.uid],

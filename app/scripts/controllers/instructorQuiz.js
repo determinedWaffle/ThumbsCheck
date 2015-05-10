@@ -1,5 +1,5 @@
 angular.module('thumbsCheckApp')
-  .controller('QuizCtrl', function($scope, $firebaseObject, $firebaseArray, Ref, user, verifyInstructorService) {
+  .controller('QuizCtrl', function($scope, $firebaseObject, $firebaseArray, Ref, user, verifyInstructorService, tallyUpStudentResponsesService, pickRandomService) {
     // To get userID.role from web browser localStorage
     //if (localStorage.getItem(user.uid) !== 'instructor') {
     //  $location.path('/student-main');
@@ -30,7 +30,6 @@ angular.module('thumbsCheckApp')
 
       quiz.question = question;
       quiz.choices = choices;
-      console.log(quiz);
       quizes.$add(quiz);
 
       // clear form
@@ -53,12 +52,11 @@ angular.module('thumbsCheckApp')
     // Show only one quiz at a time
     $scope.oneAtATime = true;
     $scope.pushQuiz = function(quiz) {
-      // console.log('clicked', quiz);
+      console.log('clicked', quiz);
       var newQuizRef = Ref.child('newQuiz');
       var newQuizObj = $firebaseObject(newQuizRef);
       newQuizObj.quiz = quiz;
       newQuizObj.$save();
-
       // Remove the quizResponses table
       $firebaseObject(Ref.child('quizResponses')).$remove();
 
@@ -75,10 +73,7 @@ angular.module('thumbsCheckApp')
     // watch firebase responses, upon change, update counts and studentList
     quizResponsesObj.$loaded().then(function() {
       quizResponsesObj.$watch(function() {
-        // console.log('watch');
-        results = $scope.total();
-        // $scope.quizResult = results[0];
-        // $scope.studentList = results[1];
+          results = $scope.total();
       });
     });
 
@@ -93,41 +88,10 @@ angular.module('thumbsCheckApp')
         quizCounts.push(0);
         studentList[i] = [];
       }
-      // console.log('result initial',quizCounts);
-      // console.log('studentList', studentList);
-
-      // for input of $scope.pickRandom()
-      // console.log('studentList',studentList);
       quizResponsesObj.$loaded().then(function(responses) {
-        // console.log('responses:', responses);
-
-        // Make key: $id and $priority non-enumerable
-        Object.defineProperty(responses, '$id', {
-          enumerable: false
-        });
-        Object.defineProperty(responses, '$priority', {
-          enumerable: false
-        });
-        Object.defineProperty(responses, '$$conf', {
-          enumerable: false
-        });
-
-        for (var key in responses) {
-          if (responses.hasOwnProperty(key)) {
-            // console.log('key',key);
-            var response = responses[key][key];
-            // console.log('choice index', response);
-            // console.log('type',typeof response);
-            quizCounts[response] += 1;
-            studentList[response].push(key);
-          }
-        }
-
-        // debugger;
+        tallyUpStudentResponsesService.tallyUpResponses(responses, undefined, studentList, quizCounts);
         $scope.populateProgressBar(quizCounts);
         $scope.studentList = studentList;
-        // console.log('quizCounts before return', quizCounts);
-        // console.log('studentList', studentList);
       });
     };
 
@@ -149,17 +113,17 @@ angular.module('thumbsCheckApp')
     };
 
     $scope.populateProgressBar = function(quizResult) {
-      // if($scope.quizCounts){return;}
       $scope.stacked = [];
+
       var types = ['success', 'info', 'warning', 'danger'];
-      // $scope.quizResult = [2,50,50];
-      // quizResult
-      // console.log('quizResult progress', quizResult);
+
       var quizCountsTotal = quizResult.reduce(function(memo, x) {
         return memo + x;
       });
 
-      // console.log('counts total',quizCountsTotal);
+      if (quizCountsTotal === 0) {
+        return $scope.stacked;
+      }
 
       quizResult.forEach(function(val, i) {
         var percent = Math.floor((val / quizCountsTotal) * 100);
