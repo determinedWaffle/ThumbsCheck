@@ -27,8 +27,8 @@ angular.module('thumbsCheckApp')
     });
 
     $scope.clicked = function(thumbsChoice) {
-      console.log('clicked');
-      $scope.studentTrigger = !$scope.studentTrigger;
+      // Hide thumbs choice after student made a choice
+      $scope.thumbsTrigger = false;
       var studentResponseRef = Ref.child('responses').child(user.uid); // collection within the database.
       var obj = $firebaseObject(studentResponseRef);
       obj.$loaded().then(function(data) {
