@@ -6,9 +6,8 @@ angular.module('thumbsCheckApp')
     var trigObj = $firebaseObject(triggerRef);
     trigObj.$loaded().then(function(data) {
       trigObj.$watch(function() {
-        console.log('watch', $scope.thumbsTrigger);
         $scope.thumbsTrigger = true;
-        $scope.thumbsChoice = 'middle';
+        $scope.thumbsChoice = '';
       });
     });
 
