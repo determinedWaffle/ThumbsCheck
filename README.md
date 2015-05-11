@@ -13,10 +13,12 @@
 
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
+2. [Tech Stack](#tech-stack)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Set up Firebase](#set-up-firebase)
     1. [Start local server](#start-local-server)
+    1. [Deploy to production](#deploy-to-production)
 1. [Team](#team)
 1. [Contributing](#contributing)
 
@@ -32,7 +34,20 @@ If you would like to use the app as an instructor, you will need to add your Git
 
 - Node 0.10.x
 - Express 4.x
-- Firebase Instance
+- Firebase Instance (set up at www.firebase.com)
+- Bower
+
+## Tech stack
+
+We use an Angular client on top of a Firebase backend. We use the official Firebase integration with Angular, called [AngularFire](https://www.firebase.com/docs/web/libraries/angular/), to gain access to objects stored on Firebase and manage authentication. 
+
+[Firebase](https://www.firebase.com/) is a 'backend as a service'. It allows us to write very little server-side code and is really nifty for syncing real-time data. Firebase is essentially a Mongo database that stores all data as JSON.
+
+The very thin server we have is based on Node and Express.
+
+The UI is based on [Bootstrap](http://getbootstrap.com/).
+
+Bower will install all the front-end dependencis for you. Grunt automates some tasks for us. Unit testing (just a stub for now) is done with Karma and uses [Angular-Mocks](https://github.com/angular/bower-angular-mocks) (included in the Bower dependencies).
 
 ## Development
 
@@ -58,10 +73,22 @@ The only required task in Firebase is to create a key called 'instructors'. The 
 In the root directory:
 
 ```sh
-node server.js
+grunt deploy
 ```
 
-In your browser open 'http://localhost:3000'.
+This will start a grunt process that watches all your client and server files for changes and restarts the server if changes are detected.
+
+Now just open your browser to 'http://localhost:3000'.
+
+### Deploy to production
+
+Deploying your app using Firebase is a snap! From the root directory run:
+
+```sh
+grunt deploy
+```
+
+You will be prompted to enter your Firebase login credentials. Once completed, just navigate to 'https://<your_app_name>.firebaseapp.com/' where 'your_app_name' is the the name you configured in Firebase for your app. We used 'https://waffleup.firebaseapp.com/'.
 
 ## Roadmap
 
