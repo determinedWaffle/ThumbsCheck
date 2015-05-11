@@ -21,7 +21,6 @@ angular.module('thumbsCheckApp')
 
     $scope.addQuiz = function(question, choices) {
       var quiz = {};
-
       quiz.question = question;
       quiz.choices = choices;
       quizes.$add(quiz);
@@ -46,7 +45,8 @@ angular.module('thumbsCheckApp')
     // Show only one quiz at a time
     $scope.oneAtATime = true;
     $scope.pushQuiz = function(quiz) {
-      console.log('clicked', quiz);
+      // console.log('clicked', quiz);
+      
       var newQuizRef = Ref.child('newQuiz');
       var newQuizObj = $firebaseObject(newQuizRef);
       newQuizObj.quiz = quiz;
