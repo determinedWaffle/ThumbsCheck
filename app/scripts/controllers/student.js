@@ -27,8 +27,8 @@ angular.module('thumbsCheckApp')
     });
 
     $scope.clicked = function(thumbsChoice) {
-      console.log('clicked');
-      $scope.studentTrigger = !$scope.studentTrigger;
+      // Hide thumbs choice after student made a choice
+      $scope.thumbsTrigger = false;
       var studentResponseRef = Ref.child('responses').child(user.uid); // collection within the database.
       var obj = $firebaseObject(studentResponseRef);
       obj.$loaded().then(function(data) {
@@ -44,6 +44,8 @@ angular.module('thumbsCheckApp')
     var quizResponsesRef = Ref.child('quizResponses').child(user.uid);
     var quizResponsesObj = $firebaseObject(quizResponsesRef);
     $scope.submitQuizChoice = function(choice) {
+      // Hide quiz after student made a choice
+      $scope.quizTrigger = false;
       quizResponsesObj.$loaded().then(function(data) {
         quizResponsesObj[$scope.uid] = choice;
         quizResponsesObj.$save().then(function(ref) {
