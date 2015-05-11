@@ -36,3 +36,7 @@ div.singleButton{
 .add-quiz{
   display: block;
 }
+
+h3{
+  font-style: italic;
+}
