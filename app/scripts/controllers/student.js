@@ -3,11 +3,14 @@ angular.module('thumbsCheckApp')
     var triggerRef = Ref.child('trigger');
     $scope.uid = user.uid;
 
+
+    $scope.userThumbsChoices = generateUserThumbsChoices(); 
+
     var trigObj = $firebaseObject(triggerRef);
     trigObj.$loaded().then(function(data) {
       trigObj.$watch(function() {
         $scope.thumbsTrigger = true;
-        $scope.thumbsChoice = '';
+        $scope.userThumbsChoices = generateUserThumbsChoices(); 
       });
     });
 
@@ -26,9 +29,28 @@ angular.module('thumbsCheckApp')
       $scope.quiz = quiz;
     });
 
+    function generateUserThumbsChoices(){
+      var userThumbsChoices = [
+      {
+        choice: 'up',
+        icon: 'glyphicon glyphicon-thumbs-up'
+      },
+      {
+        choice: 'middle',
+        icon: 'glyphicon glyphicon-resize-horizontal'
+      },
+      {
+        choice: 'down',
+        icon: 'glyphicon glyphicon-thumbs-down'
+      }];
+      return userThumbsChoices;
+    }
+
     $scope.clicked = function(thumbsChoice) {
       // Hide thumbs choice after student made a choice
       $scope.thumbsTrigger = false;
+      // To fix button active
+      // $scope.thumbsChoice = undefined;
       var studentResponseRef = Ref.child('responses').child(user.uid); // collection within the database.
       var obj = $firebaseObject(studentResponseRef);
       obj.$loaded().then(function(data) {
@@ -40,6 +62,11 @@ angular.module('thumbsCheckApp')
         });
       });
     };
+
+    $scope.test = function(thumbs){
+      console.log('thumbs:',thumbs);
+    };
+
 
     var quizResponsesRef = Ref.child('quizResponses').child(user.uid);
     var quizResponsesObj = $firebaseObject(quizResponsesRef);
