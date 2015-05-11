@@ -40,3 +40,12 @@ div.singleButton{
 h3{
   font-style: italic;
 }
+
+div.login {
+  background: url(../assets/classroom.jpg) no-repeat;
+  color: #D4A26A;
+}
+
+div.login button {
+  color: black;
+}
