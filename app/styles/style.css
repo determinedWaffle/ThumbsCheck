@@ -43,9 +43,53 @@ h3{
 
 div.login {
   background: url(../assets/classroom.jpg) no-repeat;
-  color: #D4A26A;
+  color: white;
 }
 
 div.login button {
   color: black;
+}
+
+.marketing {
+  color: #FFD6AA;
+}
+
+div.login > div {
+  display:inline-block;
+}
+
+div.login fieldset {
+  padding: 1em;
+  margin-top: 1.5em;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  position: relative;
+}
+
+div.google-play, div.app-store {
+  color: white;
+  width: 129px;
+  height: 45px;
+  position: absolute;
+  right: 0;
+  margin-right: 1em;
+  margin-top: 2em;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+div.google-play {
+  background-image: url(../assets/android.png);
+  top: 0;
+}
+
+div.app-store {
+  background-image: url(../assets/app-store.png);
+  background-color: black;
+  top: 60px;
+  border: 1px solid white;
+  border-radius: 8px;
+  background-size: 100% 100%;
 }
