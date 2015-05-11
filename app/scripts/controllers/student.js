@@ -44,6 +44,8 @@ angular.module('thumbsCheckApp')
     var quizResponsesRef = Ref.child('quizResponses').child(user.uid);
     var quizResponsesObj = $firebaseObject(quizResponsesRef);
     $scope.submitQuizChoice = function(choice) {
+      // Hide quiz after student made a choice
+      $scope.quizTrigger = false;
       quizResponsesObj.$loaded().then(function(data) {
         quizResponsesObj[$scope.uid] = choice;
         quizResponsesObj.$save().then(function(ref) {
