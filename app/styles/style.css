@@ -48,6 +48,7 @@ div.login {
 
 div.login button {
   color: black;
+  background: rgba(204,204,204,1);
 }
 
 .marketing {
