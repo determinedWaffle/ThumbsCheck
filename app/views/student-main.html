@@ -13,9 +13,13 @@
   <div ng-if="quizTrigger" ng-init="quizTrigger = false">
     <p>testing quiz</p>
     <div>
-      Question: {{ quiz.question }} <br/>
-      <div class="btn-group" ng-repeat="choice in quiz.choices track by $index">
-        <label class="btn btn-primary" ng-model="quizChoice" btn-radio="choice" ng-click="submitQuizChoice($index)">{{choice}}</label>
+      <h2>Question:</h2> <h3>{{ quiz.question }}</h3> <br/>
+      <div class="btn-group btn-group-justified btn-group-lg hidden-sm hidden-xs" >
+        <label class="btn btn-primary" ng-model="quizChoice" btn-radio="choice" ng-click="submitQuizChoice($index)" ng-repeat="choice in quiz.choices track by $index">{{choice}}</label>
+      </div>
+
+      <div class="btn-group-vertical btn-group-lg visible-sm visible-xs hidden-md hidden-lg">
+        <label class="btn btn-primary" ng-model="quizChoice" btn-radio="choice" ng-click="submitQuizChoice($index)" ng-repeat="choice in quiz.choices track by $index">{{choice}}</label>
       </div>
     </div>
   </div>
