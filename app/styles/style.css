@@ -21,6 +21,11 @@ body{
   /*background: url("../assets/seamless_paper_texture.png") repeat;*/
 }
 
+.jumbotron.login{
+  border-radius: 10px;
+  border: 1px solid grey;
+}
+
 a.navbar-brand{
   font-weight: bolder;
 }
